@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   LocationMarkerIcon as MapPinIcon,
   ChartBarIcon,
@@ -14,11 +15,15 @@ import {
   ArrowRightIcon,
   PlayIcon,
   ArrowsExpandIcon,
+  SunIcon,
+  MoonIcon,
 } from '@heroicons/react/outline';
 import { MapContainer, TileLayer, Marker, Popup, CircleMarker } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import FullscreenMapModal from '../components/modals/FullscreenMapModal';
+import { AppDispatch, RootState } from '../store';
+import { toggleTheme } from '../store/slices/uiSlice';
 
 // Fix for default markers in react-leaflet
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -56,6 +61,8 @@ interface LiveResult {
 }
 
 const Landing: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { theme } = useSelector((state: RootState) => state.ui);
   const [activeView, setActiveView] = useState<'grid' | 'list' | 'map'>('grid');
   const [selectedState, setSelectedState] = useState<string>('all');
   const [showFullscreenMap, setShowFullscreenMap] = useState(false);
@@ -240,9 +247,9 @@ const Landing: React.FC = () => {
   };
 
   return (
-    <div className='min-h-screen bg-gray-50'>
+    <div className='min-h-screen bg-gray-50 dark:bg-gray-900'>
       {/* Header */}
-      <header className='bg-white shadow-sm border-b border-gray-200'>
+      <header className='bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='flex justify-between items-center h-16'>
             <div className='flex items-center'>
@@ -252,34 +259,47 @@ const Landing: React.FC = () => {
               <nav className='hidden md:ml-8 md:flex md:space-x-8'>
                 <a
                   href='#home'
-                  className='text-gray-900 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors'
+                  className='text-gray-900 dark:text-gray-100 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors'
                 >
                   Home
                 </a>
                 <a
                   href='#live'
-                  className='text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors'
+                  className='text-gray-700 dark:text-gray-300 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors'
                 >
                   Live Results
                 </a>
                 <a
                   href='#about'
-                  className='text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors'
+                  className='text-gray-700 dark:text-gray-300 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors'
                 >
                   About
                 </a>
                 <a
                   href='#contact'
-                  className='text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors'
+                  className='text-gray-700 dark:text-gray-300 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors'
                 >
                   Contact
                 </a>
               </nav>
             </div>
             <div className='flex items-center space-x-4'>
+              {/* Theme Toggle */}
+              <button
+                onClick={() => dispatch(toggleTheme())}
+                className='p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors'
+                aria-label='Toggle theme'
+              >
+                {theme === 'dark' ? (
+                  <SunIcon className='h-5 w-5' />
+                ) : (
+                  <MoonIcon className='h-5 w-5' />
+                )}
+              </button>
+
               <Link
                 to='/login'
-                className='text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors'
+                className='text-gray-700 dark:text-gray-300 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors'
               >
                 Login
               </Link>
@@ -323,51 +343,53 @@ const Landing: React.FC = () => {
       </section>
 
       {/* Stats Section */}
-      <section className='bg-white py-16'>
+      <section className='bg-white dark:bg-gray-800 py-16'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8'>
             <div className='text-center'>
               <div className='text-3xl font-bold text-primary-600'>{stats.states}</div>
-              <div className='text-sm text-gray-500 mt-1'>States</div>
+              <div className='text-sm text-gray-500 dark:text-gray-400 mt-1'>States</div>
             </div>
             <div className='text-center'>
               <div className='text-3xl font-bold text-primary-600'>{stats.lgas}</div>
-              <div className='text-sm text-gray-500 mt-1'>LGAs</div>
+              <div className='text-sm text-gray-500 dark:text-gray-400 mt-1'>LGAs</div>
             </div>
             <div className='text-center'>
               <div className='text-3xl font-bold text-primary-600'>
                 {stats.totalPollingUnits.toLocaleString()}
               </div>
-              <div className='text-sm text-gray-500 mt-1'>Polling Units</div>
+              <div className='text-sm text-gray-500 dark:text-gray-400 mt-1'>Polling Units</div>
             </div>
             <div className='text-center'>
               <div className='text-3xl font-bold text-green-600'>
                 {stats.reportedResults.toLocaleString()}
               </div>
-              <div className='text-sm text-gray-500 mt-1'>Results Reported</div>
+              <div className='text-sm text-gray-500 dark:text-gray-400 mt-1'>Results Reported</div>
             </div>
             <div className='text-center'>
               <div className='text-3xl font-bold text-blue-600'>
                 {stats.verifiedResults.toLocaleString()}
               </div>
-              <div className='text-sm text-gray-500 mt-1'>Verified Results</div>
+              <div className='text-sm text-gray-500 dark:text-gray-400 mt-1'>Verified Results</div>
             </div>
             <div className='text-center'>
               <div className='text-3xl font-bold text-purple-600'>
                 {stats.totalVotes.toLocaleString()}
               </div>
-              <div className='text-sm text-gray-500 mt-1'>Total Votes</div>
+              <div className='text-sm text-gray-500 dark:text-gray-400 mt-1'>Total Votes</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Live Results Section */}
-      <section id='live' className='bg-gray-50 py-16'>
+      <section id='live' className='bg-gray-50 dark:bg-gray-900 py-16'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-12'>
-            <h2 className='text-3xl font-bold text-gray-900 mb-4'>Live Election Results</h2>
-            <p className='text-lg text-gray-600'>
+            <h2 className='text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4'>
+              Live Election Results
+            </h2>
+            <p className='text-lg text-gray-600 dark:text-gray-400'>
               Real-time updates from polling units across all 36 states and 774 LGAs
             </p>
           </div>
@@ -378,7 +400,7 @@ const Landing: React.FC = () => {
               <select
                 value={selectedState}
                 onChange={e => setSelectedState(e.target.value)}
-                className='border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500'
+                className='border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500'
               >
                 <option value='all'>All States</option>
                 {nigerianStates.map(state => (
@@ -389,22 +411,22 @@ const Landing: React.FC = () => {
               </select>
             </div>
 
-            <div className='flex items-center space-x-2 bg-white rounded-lg p-1 border'>
+            <div className='flex items-center space-x-2 bg-white dark:bg-gray-800 rounded-lg p-1 border border-gray-200 dark:border-gray-700'>
               <button
                 onClick={() => setActiveView('grid')}
-                className={`p-2 rounded-md ${activeView === 'grid' ? 'bg-primary-100 text-primary-600' : 'text-gray-500 hover:text-gray-700'}`}
+                className={`p-2 rounded-md ${activeView === 'grid' ? 'bg-primary-100 text-primary-600' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'}`}
               >
                 <Squares2X2Icon className='h-5 w-5' />
               </button>
               <button
                 onClick={() => setActiveView('list')}
-                className={`p-2 rounded-md ${activeView === 'list' ? 'bg-primary-100 text-primary-600' : 'text-gray-500 hover:text-gray-700'}`}
+                className={`p-2 rounded-md ${activeView === 'list' ? 'bg-primary-100 text-primary-600' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'}`}
               >
                 <ListBulletIcon className='h-5 w-5' />
               </button>
               <button
                 onClick={() => setActiveView('map')}
-                className={`p-2 rounded-md ${activeView === 'map' ? 'bg-primary-100 text-primary-600' : 'text-gray-500 hover:text-gray-700'}`}
+                className={`p-2 rounded-md ${activeView === 'map' ? 'bg-primary-100 text-primary-600' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'}`}
               >
                 <MapIcon className='h-5 w-5' />
               </button>
@@ -414,18 +436,23 @@ const Landing: React.FC = () => {
           {loading ? (
             <div className='text-center py-12'>
               <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto'></div>
-              <p className='mt-4 text-gray-600'>Loading live results...</p>
+              <p className='mt-4 text-gray-600 dark:text-gray-400'>Loading live results...</p>
             </div>
           ) : (
             <div>
               {activeView === 'grid' && (
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
                   {filteredResults.slice(0, 12).map(result => (
-                    <div key={result.id} className='bg-white rounded-lg shadow-sm border p-6'>
+                    <div
+                      key={result.id}
+                      className='bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6'
+                    >
                       <div className='flex justify-between items-start mb-4'>
                         <div>
-                          <h3 className='font-semibold text-gray-900'>{result.pollingUnit}</h3>
-                          <p className='text-sm text-gray-600'>
+                          <h3 className='font-semibold text-gray-900 dark:text-gray-100'>
+                            {result.pollingUnit}
+                          </h3>
+                          <p className='text-sm text-gray-600 dark:text-gray-400'>
                             {result.lga}, {result.state}
                           </p>
                         </div>
@@ -442,24 +469,28 @@ const Landing: React.FC = () => {
                         {result.candidates.slice(0, 3).map((candidate, index) => (
                           <div key={index} className='flex justify-between items-center'>
                             <div>
-                              <span className='font-medium text-sm'>{candidate.party}</span>
-                              <span className='text-xs text-gray-500 ml-2'>{candidate.name}</span>
+                              <span className='font-medium text-sm text-gray-900 dark:text-gray-100'>
+                                {candidate.party}
+                              </span>
+                              <span className='text-xs text-gray-500 dark:text-gray-400 ml-2'>
+                                {candidate.name}
+                              </span>
                             </div>
                             <div className='text-right'>
-                              <div className='font-semibold'>
+                              <div className='font-semibold text-gray-900 dark:text-gray-100'>
                                 {candidate.votes.toLocaleString()}
                               </div>
-                              <div className='text-xs text-gray-500'>
+                              <div className='text-xs text-gray-500 dark:text-gray-400'>
                                 {candidate.percentage.toFixed(1)}%
                               </div>
                             </div>
                           </div>
                         ))}
                       </div>
-                      <div className='mt-4 pt-4 border-t border-gray-200'>
+                      <div className='mt-4 pt-4 border-t border-gray-200 dark:border-gray-600'>
                         <div className='flex justify-between text-sm'>
-                          <span className='text-gray-600'>Total Votes:</span>
-                          <span className='font-semibold'>
+                          <span className='text-gray-600 dark:text-gray-400'>Total Votes:</span>
+                          <span className='font-semibold text-gray-900 dark:text-gray-100'>
                             {result.totalVotes.toLocaleString()}
                           </span>
                         </div>
@@ -470,48 +501,52 @@ const Landing: React.FC = () => {
               )}
 
               {activeView === 'list' && (
-                <div className='bg-white rounded-lg shadow-sm border overflow-hidden'>
-                  <table className='min-w-full divide-y divide-gray-200'>
-                    <thead className='bg-gray-50'>
+                <div className='bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 overflow-hidden'>
+                  <table className='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
+                    <thead className='bg-gray-50 dark:bg-gray-700'>
                       <tr>
-                        <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                        <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                           Polling Unit
                         </th>
-                        <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                        <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                           Location
                         </th>
-                        <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                        <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                           Leading Candidate
                         </th>
-                        <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                        <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                           Total Votes
                         </th>
-                        <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                        <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                           Status
                         </th>
                       </tr>
                     </thead>
-                    <tbody className='bg-white divide-y divide-gray-200'>
+                    <tbody className='bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700'>
                       {filteredResults.slice(0, 20).map(result => (
-                        <tr key={result.id} className='hover:bg-gray-50'>
+                        <tr key={result.id} className='hover:bg-gray-50 dark:hover:bg-gray-700'>
                           <td className='px-6 py-4 whitespace-nowrap'>
-                            <div className='text-sm font-medium text-gray-900'>
+                            <div className='text-sm font-medium text-gray-900 dark:text-gray-100'>
                               {result.pollingUnit}
                             </div>
                           </td>
                           <td className='px-6 py-4 whitespace-nowrap'>
-                            <div className='text-sm text-gray-900'>{result.lga}</div>
-                            <div className='text-sm text-gray-500'>{result.state}</div>
+                            <div className='text-sm text-gray-900 dark:text-gray-100'>
+                              {result.lga}
+                            </div>
+                            <div className='text-sm text-gray-500 dark:text-gray-400'>
+                              {result.state}
+                            </div>
                           </td>
                           <td className='px-6 py-4 whitespace-nowrap'>
-                            <div className='text-sm font-medium text-gray-900'>
+                            <div className='text-sm font-medium text-gray-900 dark:text-gray-100'>
                               {result.candidates[0]?.party}
                             </div>
-                            <div className='text-sm text-gray-500'>
+                            <div className='text-sm text-gray-500 dark:text-gray-400'>
                               {result.candidates[0]?.votes.toLocaleString()} votes
                             </div>
                           </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100'>
                             {result.totalVotes.toLocaleString()}
                           </td>
                           <td className='px-6 py-4 whitespace-nowrap'>
@@ -532,14 +567,14 @@ const Landing: React.FC = () => {
               )}
 
               {activeView === 'map' && (
-                <div className='bg-white rounded-lg shadow-sm border overflow-hidden'>
-                  <div className='p-4 border-b border-gray-200'>
+                <div className='bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 overflow-hidden'>
+                  <div className='p-4 border-b border-gray-200 dark:border-gray-600'>
                     <div className='flex items-center justify-between'>
                       <div>
-                        <h3 className='text-lg font-medium text-gray-900 mb-2'>
+                        <h3 className='text-lg font-medium text-gray-900 dark:text-gray-100 mb-2'>
                           Interactive Map View
                         </h3>
-                        <p className='text-gray-600'>
+                        <p className='text-gray-600 dark:text-gray-400'>
                           Real-time election results across Nigeria's 36 states and 774 LGAs.
                         </p>
                       </div>
@@ -628,19 +663,19 @@ const Landing: React.FC = () => {
                       })}
                     </MapContainer>
                   </div>
-                  <div className='p-4 bg-gray-50 border-t border-gray-200'>
+                  <div className='p-4 bg-gray-50 dark:bg-gray-700 border-t border-gray-200 dark:border-gray-600'>
                     <div className='flex items-center justify-center space-x-6 text-sm'>
                       <div className='flex items-center space-x-2'>
                         <div className='w-3 h-3 rounded-full bg-green-500'></div>
-                        <span className='text-gray-700'>Verified</span>
+                        <span className='text-gray-700 dark:text-gray-300'>Verified</span>
                       </div>
                       <div className='flex items-center space-x-2'>
                         <div className='w-3 h-3 rounded-full bg-yellow-500'></div>
-                        <span className='text-gray-700'>Pending</span>
+                        <span className='text-gray-700 dark:text-gray-300'>Pending</span>
                       </div>
                       <div className='flex items-center space-x-2'>
                         <div className='w-3 h-3 rounded-full bg-red-500'></div>
-                        <span className='text-gray-700'>Disputed</span>
+                        <span className='text-gray-700 dark:text-gray-300'>Disputed</span>
                       </div>
                     </div>
                   </div>
@@ -652,11 +687,13 @@ const Landing: React.FC = () => {
       </section>
 
       {/* About Section */}
-      <section id='about' className='bg-white py-16'>
+      <section id='about' className='bg-white dark:bg-gray-900 py-16'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-12'>
-            <h2 className='text-3xl font-bold text-gray-900 mb-4'>About eReporter</h2>
-            <p className='text-lg text-gray-600 max-w-3xl mx-auto'>
+            <h2 className='text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4'>
+              About eReporter
+            </h2>
+            <p className='text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto'>
               eReporter is Nigeria's premier election reporting platform, providing transparent,
               accurate, and real-time election results from polling units across all 36 states and
               774 LGAs.
@@ -665,31 +702,37 @@ const Landing: React.FC = () => {
 
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
             <div className='text-center'>
-              <div className='bg-primary-100 rounded-full p-4 w-16 h-16 mx-auto mb-4'>
-                <EyeIcon className='h-8 w-8 text-primary-600' />
+              <div className='bg-primary-100 dark:bg-primary-900 rounded-full p-4 w-16 h-16 mx-auto mb-4'>
+                <EyeIcon className='h-8 w-8 text-primary-600 dark:text-primary-400' />
               </div>
-              <h3 className='text-xl font-semibold text-gray-900 mb-2'>Transparency</h3>
-              <p className='text-gray-600'>
+              <h3 className='text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2'>
+                Transparency
+              </h3>
+              <p className='text-gray-600 dark:text-gray-400'>
                 Complete transparency in election reporting with real-time updates and verification
                 processes.
               </p>
             </div>
             <div className='text-center'>
-              <div className='bg-primary-100 rounded-full p-4 w-16 h-16 mx-auto mb-4'>
-                <ChartBarIcon className='h-8 w-8 text-primary-600' />
+              <div className='bg-primary-100 dark:bg-primary-900 rounded-full p-4 w-16 h-16 mx-auto mb-4'>
+                <ChartBarIcon className='h-8 w-8 text-primary-600 dark:text-primary-400' />
               </div>
-              <h3 className='text-xl font-semibold text-gray-900 mb-2'>Accuracy</h3>
-              <p className='text-gray-600'>
+              <h3 className='text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2'>
+                Accuracy
+              </h3>
+              <p className='text-gray-600 dark:text-gray-400'>
                 Rigorous verification processes ensure the highest level of accuracy in reported
                 results.
               </p>
             </div>
             <div className='text-center'>
-              <div className='bg-primary-100 rounded-full p-4 w-16 h-16 mx-auto mb-4'>
-                <UserGroupIcon className='h-8 w-8 text-primary-600' />
+              <div className='bg-primary-100 dark:bg-primary-900 rounded-full p-4 w-16 h-16 mx-auto mb-4'>
+                <UserGroupIcon className='h-8 w-8 text-primary-600 dark:text-primary-400' />
               </div>
-              <h3 className='text-xl font-semibold text-gray-900 mb-2'>Accessibility</h3>
-              <p className='text-gray-600'>
+              <h3 className='text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2'>
+                Accessibility
+              </h3>
+              <p className='text-gray-600 dark:text-gray-400'>
                 Easy access for all citizens to view election results in multiple formats and
                 layouts.
               </p>
