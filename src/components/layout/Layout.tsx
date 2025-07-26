@@ -14,7 +14,7 @@ const Layout: React.FC = () => {
   const { sidebarCollapsed } = useSelector((state: RootState) => state.ui);
 
   return (
-    <div className='h-screen flex overflow-hidden bg-gray-100'>
+    <div className='h-screen flex overflow-hidden bg-gray-100 dark:bg-gray-900'>
       {/* Sidebar */}
       <Sidebar
         open={sidebarOpen}
