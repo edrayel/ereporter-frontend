@@ -184,41 +184,41 @@ const Admin: React.FC = () => {
   const getRoleColor = (role: string) => {
     switch (role) {
       case 'admin':
-        return 'text-error-600 bg-error-100';
+        return 'text-error-600 dark:text-error-400 bg-error-100 dark:bg-error-900';
       case 'coordinator':
-        return 'text-primary-600 bg-primary-100';
+        return 'text-primary-600 dark:text-primary-400 bg-primary-100 dark:bg-primary-900';
       case 'agent':
-        return 'text-success-600 bg-success-100';
+        return 'text-success-600 dark:text-success-400 bg-success-100 dark:bg-success-900';
       case 'legal':
-        return 'text-warning-600 bg-warning-100';
+        return 'text-warning-600 dark:text-warning-400 bg-warning-100 dark:bg-warning-900';
       default:
-        return 'text-gray-600 bg-gray-100';
+        return 'text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800';
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'active':
-        return 'text-success-600 bg-success-100';
+        return 'text-success-600 dark:text-success-400 bg-success-100 dark:bg-success-900';
       case 'inactive':
-        return 'text-gray-600 bg-gray-100';
+        return 'text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800';
       case 'suspended':
-        return 'text-error-600 bg-error-100';
+        return 'text-error-600 dark:text-error-400 bg-error-100 dark:bg-error-900';
       default:
-        return 'text-gray-600 bg-gray-100';
+        return 'text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800';
     }
   };
 
   const getAuditStatusColor = (status: string) => {
     switch (status) {
       case 'success':
-        return 'text-success-600 bg-success-100';
+        return 'text-success-600 dark:text-success-400 bg-success-100 dark:bg-success-900';
       case 'failed':
-        return 'text-error-600 bg-error-100';
+        return 'text-error-600 dark:text-error-400 bg-error-100 dark:bg-error-900';
       case 'warning':
-        return 'text-warning-600 bg-warning-100';
+        return 'text-warning-600 dark:text-warning-400 bg-warning-100 dark:bg-warning-900';
       default:
-        return 'text-gray-600 bg-gray-100';
+        return 'text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800';
     }
   };
 
@@ -383,14 +383,16 @@ const Admin: React.FC = () => {
           <div className='flex items-center space-x-3'>
             <CogIcon className='h-8 w-8 text-primary-600' />
             <div>
-              <h1 className='text-2xl font-bold text-gray-900'>Administration</h1>
-              <p className='text-sm text-gray-600'>System administration and configuration</p>
+              <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>Administration</h1>
+              <p className='text-sm text-gray-600 dark:text-gray-400'>
+                System administration and configuration
+              </p>
             </div>
           </div>
         </div>
 
         {/* Navigation Tabs */}
-        <div className='border-b border-gray-200'>
+        <div className='border-b border-gray-200 dark:border-gray-700'>
           <nav className='-mb-px flex space-x-8'>
             {[
               { id: 'overview', name: 'Overview', icon: 'ChartBarIcon' },
@@ -403,8 +405,8 @@ const Admin: React.FC = () => {
                 onClick={() => setActiveTab(tab.id as any)}
                 className={classNames(
                   activeTab === tab.id
-                    ? 'border-primary-500 text-primary-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
+                    ? 'border-primary-500 text-primary-600 dark:text-primary-400'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600',
                   'whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm flex items-center space-x-2',
                 )}
               >
@@ -423,7 +425,7 @@ const Admin: React.FC = () => {
           <div className='space-y-6'>
             {/* System Metrics */}
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-              <div className='bg-white overflow-hidden shadow rounded-lg'>
+              <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
                 <div className='p-5'>
                   <div className='flex items-center'>
                     <div className='flex-shrink-0'>
@@ -431,15 +433,19 @@ const Admin: React.FC = () => {
                     </div>
                     <div className='ml-5 w-0 flex-1'>
                       <dl>
-                        <dt className='text-sm font-medium text-gray-500 truncate'>Total Users</dt>
-                        <dd className='text-lg font-medium text-gray-900'>{metrics?.totalUsers}</dd>
+                        <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                          Total Users
+                        </dt>
+                        <dd className='text-lg font-medium text-gray-900 dark:text-white'>
+                          {metrics?.totalUsers}
+                        </dd>
                       </dl>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className='bg-white overflow-hidden shadow rounded-lg'>
+              <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
                 <div className='p-5'>
                   <div className='flex items-center'>
                     <div className='flex-shrink-0'>
@@ -447,10 +453,10 @@ const Admin: React.FC = () => {
                     </div>
                     <div className='ml-5 w-0 flex-1'>
                       <dl>
-                        <dt className='text-sm font-medium text-gray-500 truncate'>
+                        <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
                           Active Agents
                         </dt>
-                        <dd className='text-lg font-medium text-gray-900'>
+                        <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                           {metrics?.activeAgents}
                         </dd>
                       </dl>
@@ -459,7 +465,7 @@ const Admin: React.FC = () => {
                 </div>
               </div>
 
-              <div className='bg-white overflow-hidden shadow rounded-lg'>
+              <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
                 <div className='p-5'>
                   <div className='flex items-center'>
                     <div className='flex-shrink-0'>
@@ -467,10 +473,10 @@ const Admin: React.FC = () => {
                     </div>
                     <div className='ml-5 w-0 flex-1'>
                       <dl>
-                        <dt className='text-sm font-medium text-gray-500 truncate'>
+                        <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
                           System Uptime
                         </dt>
-                        <dd className='text-lg font-medium text-gray-900'>
+                        <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                           {metrics?.systemUptime}
                         </dd>
                       </dl>
@@ -479,7 +485,7 @@ const Admin: React.FC = () => {
                 </div>
               </div>
 
-              <div className='bg-white overflow-hidden shadow rounded-lg'>
+              <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
                 <div className='p-5'>
                   <div className='flex items-center'>
                     <div className='flex-shrink-0'>
@@ -487,8 +493,10 @@ const Admin: React.FC = () => {
                     </div>
                     <div className='ml-5 w-0 flex-1'>
                       <dl>
-                        <dt className='text-sm font-medium text-gray-500 truncate'>Storage Used</dt>
-                        <dd className='text-lg font-medium text-gray-900'>
+                        <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                          Storage Used
+                        </dt>
+                        <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                           {metrics?.storageUsed}
                         </dd>
                       </dl>
@@ -497,7 +505,7 @@ const Admin: React.FC = () => {
                 </div>
               </div>
 
-              <div className='bg-white overflow-hidden shadow rounded-lg'>
+              <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
                 <div className='p-5'>
                   <div className='flex items-center'>
                     <div className='flex-shrink-0'>
@@ -505,8 +513,10 @@ const Admin: React.FC = () => {
                     </div>
                     <div className='ml-5 w-0 flex-1'>
                       <dl>
-                        <dt className='text-sm font-medium text-gray-500 truncate'>API Requests</dt>
-                        <dd className='text-lg font-medium text-gray-900'>
+                        <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                          API Requests
+                        </dt>
+                        <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                           {metrics?.apiRequests.toLocaleString()}
                         </dd>
                       </dl>
@@ -515,7 +525,7 @@ const Admin: React.FC = () => {
                 </div>
               </div>
 
-              <div className='bg-white overflow-hidden shadow rounded-lg'>
+              <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
                 <div className='p-5'>
                   <div className='flex items-center'>
                     <div className='flex-shrink-0'>
@@ -523,10 +533,10 @@ const Admin: React.FC = () => {
                     </div>
                     <div className='ml-5 w-0 flex-1'>
                       <dl>
-                        <dt className='text-sm font-medium text-gray-500 truncate'>
+                        <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
                           Polling Units
                         </dt>
-                        <dd className='text-lg font-medium text-gray-900'>
+                        <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                           {metrics?.totalPollingUnits}
                         </dd>
                       </dl>
@@ -537,36 +547,46 @@ const Admin: React.FC = () => {
             </div>
 
             {/* Quick Actions */}
-            <div className='bg-white shadow rounded-lg p-6'>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>Quick Actions</h3>
+            <div className='bg-white dark:bg-gray-800 shadow rounded-lg p-6'>
+              <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-4'>
+                Quick Actions
+              </h3>
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
                 <button
                   onClick={() => setShowAddUserModal(true)}
-                  className='flex items-center justify-center px-4 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50'
+                  className='flex flex-col items-center p-4 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors'
                 >
-                  <UserPlusIcon className='h-4 w-4 mr-2' />
-                  Add User
+                  <UserPlusIcon className='h-8 w-8 text-primary-600 dark:text-primary-400 mb-2' />
+                  <span className='text-sm font-medium text-gray-700 dark:text-gray-300'>
+                    Add User
+                  </span>
                 </button>
                 <button
                   onClick={() => setActiveTab('settings')}
-                  className='flex items-center justify-center px-4 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50'
+                  className='flex flex-col items-center p-4 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors'
                 >
-                  <CogIcon className='h-4 w-4 mr-2' />
-                  System Settings
+                  <CogIcon className='h-8 w-8 text-warning-600 dark:text-warning-400 mb-2' />
+                  <span className='text-sm font-medium text-gray-700 dark:text-gray-300'>
+                    System Settings
+                  </span>
                 </button>
                 <button
                   onClick={handleExportLogs}
-                  className='flex items-center justify-center px-4 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50'
+                  className='flex flex-col items-center p-4 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors'
                 >
-                  <DocumentTextIcon className='h-4 w-4 mr-2' />
-                  Export Logs
+                  <DocumentTextIcon className='h-8 w-8 text-secondary-600 dark:text-secondary-400 mb-2' />
+                  <span className='text-sm font-medium text-gray-700 dark:text-gray-300'>
+                    Export Logs
+                  </span>
                 </button>
                 <button
                   onClick={handleSendAlert}
-                  className='flex items-center justify-center px-4 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50'
+                  className='flex flex-col items-center p-4 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors'
                 >
-                  <BellIcon className='h-4 w-4 mr-2' />
-                  Send Alert
+                  <BellIcon className='h-8 w-8 text-success-600 dark:text-success-400 mb-2' />
+                  <span className='text-sm font-medium text-gray-700 dark:text-gray-300'>
+                    Send Alert
+                  </span>
                 </button>
               </div>
             </div>
@@ -577,24 +597,24 @@ const Admin: React.FC = () => {
         {activeTab === 'users' && (
           <div className='space-y-6'>
             {/* Search and Filters */}
-            <div className='bg-white shadow rounded-lg p-6'>
+            <div className='bg-white dark:bg-gray-800 shadow rounded-lg p-6'>
               <div className='flex flex-col sm:flex-row gap-4'>
                 <div className='flex-1'>
                   <div className='relative'>
-                    <MagnifyingGlassIcon className='absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400' />
+                    <MagnifyingGlassIcon className='absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 dark:text-gray-500' />
                     <input
                       type='text'
                       placeholder='Search users...'
                       value={searchTerm}
                       onChange={e => setSearchTerm(e.target.value)}
-                      className='pl-10 pr-4 py-2 w-full border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500'
+                      className='pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400'
                     />
                   </div>
                 </div>
                 <select
                   value={roleFilter}
                   onChange={e => setRoleFilter(e.target.value)}
-                  className='px-3 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500'
+                  className='px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                 >
                   <option value=''>All Roles</option>
                   <option value='admin'>Admin</option>
@@ -605,7 +625,7 @@ const Admin: React.FC = () => {
                 <select
                   value={statusFilter}
                   onChange={e => setStatusFilter(e.target.value)}
-                  className='px-3 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500'
+                  className='px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                 >
                   <option value=''>All Status</option>
                   <option value='active'>Active</option>
@@ -623,46 +643,50 @@ const Admin: React.FC = () => {
             </div>
 
             {/* Users Table */}
-            <div className='bg-white shadow rounded-lg overflow-hidden'>
-              <div className='px-6 py-4 border-b border-gray-200'>
-                <h3 className='text-lg font-medium text-gray-900'>
+            <div className='bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden'>
+              <div className='px-6 py-4 border-b border-gray-200 dark:border-gray-700'>
+                <h3 className='text-lg font-medium text-gray-900 dark:text-white'>
                   Users ({filteredUsers.length})
                 </h3>
               </div>
               <div className='overflow-x-auto'>
-                <table className='min-w-full divide-y divide-gray-200'>
-                  <thead className='bg-gray-50'>
+                <table className='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
+                  <thead className='bg-gray-50 dark:bg-gray-700'>
                     <tr>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                         User
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                         Role
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                         Status
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                         Last Login
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                         Actions
                       </th>
                     </tr>
                   </thead>
-                  <tbody className='bg-white divide-y divide-gray-200'>
+                  <tbody className='bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700'>
                     {filteredUsers.map(user => (
-                      <tr key={user.id} className='hover:bg-gray-50'>
+                      <tr key={user.id} className='hover:bg-gray-50 dark:hover:bg-gray-700'>
                         <td className='px-6 py-4 whitespace-nowrap'>
                           <div className='flex items-center'>
                             <div className='flex-shrink-0 h-10 w-10'>
-                              <div className='h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center'>
-                                <UserIcon className='h-5 w-5 text-primary-600' />
+                              <div className='h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center'>
+                                <UserIcon className='h-5 w-5 text-primary-600 dark:text-primary-400' />
                               </div>
                             </div>
                             <div className='ml-4'>
-                              <div className='text-sm font-medium text-gray-900'>{user.name}</div>
-                              <div className='text-sm text-gray-500'>{user.email}</div>
+                              <div className='text-sm font-medium text-gray-900 dark:text-white'>
+                                {user.name}
+                              </div>
+                              <div className='text-sm text-gray-500 dark:text-gray-400'>
+                                {user.email}
+                              </div>
                             </div>
                           </div>
                         </td>
@@ -686,26 +710,26 @@ const Admin: React.FC = () => {
                             {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
                           </span>
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400'>
                           {formatDate(user.lastLogin)}
                         </td>
                         <td className='px-6 py-4 whitespace-nowrap text-sm font-medium'>
                           <div className='flex space-x-2'>
                             <button
                               onClick={() => handleViewUser(user)}
-                              className='text-primary-600 hover:text-primary-900'
+                              className='text-primary-600 dark:text-primary-400 hover:text-primary-900 dark:hover:text-primary-300'
                             >
                               <EyeIcon className='h-4 w-4' />
                             </button>
                             <button
                               onClick={() => handleEditUser(user)}
-                              className='text-gray-600 hover:text-gray-900'
+                              className='text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300'
                             >
                               <PencilIcon className='h-4 w-4' />
                             </button>
                             <button
                               onClick={() => handleDeleteUser(user)}
-                              className='text-error-600 hover:text-error-900'
+                              className='text-error-600 dark:text-error-400 hover:text-error-900 dark:hover:text-error-300'
                             >
                               <TrashIcon className='h-4 w-4' />
                             </button>
@@ -725,112 +749,134 @@ const Admin: React.FC = () => {
           <div className='space-y-6'>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
               {/* General Settings */}
-              <div className='bg-white shadow rounded-lg p-6'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>General Settings</h3>
+              <div className='bg-white dark:bg-gray-800 shadow rounded-lg p-6'>
+                <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-4'>
+                  General Settings
+                </h3>
                 <div className='space-y-4'>
                   <div>
-                    <label className='block text-sm font-medium text-gray-700'>System Name</label>
+                    <label className='block text-sm font-medium text-gray-700 dark:text-gray-300'>
+                      System Name
+                    </label>
                     <input
                       type='text'
                       defaultValue='eReporter System'
-                      className='mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary-500 focus:border-primary-500'
+                      className='mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                     />
                   </div>
                   <div>
-                    <label className='block text-sm font-medium text-gray-700'>Time Zone</label>
-                    <select className='mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary-500 focus:border-primary-500'>
+                    <label className='block text-sm font-medium text-gray-700 dark:text-gray-300'>
+                      Time Zone
+                    </label>
+                    <select className='mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white'>
                       <option>Africa/Lagos</option>
                       <option>UTC</option>
                     </select>
                   </div>
                   <div>
-                    <label className='block text-sm font-medium text-gray-700'>
+                    <label className='block text-sm font-medium text-gray-700 dark:text-gray-300'>
                       Session Timeout (minutes)
                     </label>
                     <input
                       type='number'
                       defaultValue='30'
-                      className='mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary-500 focus:border-primary-500'
+                      className='mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                     />
                   </div>
                 </div>
               </div>
 
               {/* Security Settings */}
-              <div className='bg-white shadow rounded-lg p-6'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>Security Settings</h3>
+              <div className='bg-white dark:bg-gray-800 shadow rounded-lg p-6'>
+                <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-4'>
+                  Security Settings
+                </h3>
                 <div className='space-y-4'>
                   <div className='flex items-center justify-between'>
                     <div>
-                      <label className='text-sm font-medium text-gray-700'>
+                      <label className='text-sm font-medium text-gray-700 dark:text-gray-300'>
                         Two-Factor Authentication
                       </label>
-                      <p className='text-xs text-gray-500'>Require 2FA for all admin users</p>
+                      <p className='text-xs text-gray-500 dark:text-gray-400'>
+                        Require 2FA for all admin users
+                      </p>
                     </div>
                     <input
                       type='checkbox'
-                      className='h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded'
+                      className='h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700'
                     />
                   </div>
                   <div className='flex items-center justify-between'>
                     <div>
-                      <label className='text-sm font-medium text-gray-700'>
+                      <label className='text-sm font-medium text-gray-700 dark:text-gray-300'>
                         Password Complexity
                       </label>
-                      <p className='text-xs text-gray-500'>Enforce strong password requirements</p>
+                      <p className='text-xs text-gray-500 dark:text-gray-400'>
+                        Enforce strong password requirements
+                      </p>
                     </div>
                     <input
                       type='checkbox'
                       defaultChecked
-                      className='h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded'
+                      className='h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700'
                     />
                   </div>
                   <div>
-                    <label className='block text-sm font-medium text-gray-700'>
+                    <label className='block text-sm font-medium text-gray-700 dark:text-gray-300'>
                       Max Login Attempts
                     </label>
                     <input
                       type='number'
                       defaultValue='5'
-                      className='mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-primary-500 focus:border-primary-500'
+                      className='mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                     />
                   </div>
                 </div>
               </div>
 
               {/* Notification Settings */}
-              <div className='bg-white shadow rounded-lg p-6'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>Notification Settings</h3>
+              <div className='bg-white dark:bg-gray-800 shadow rounded-lg p-6'>
+                <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-4'>
+                  Notification Settings
+                </h3>
                 <div className='space-y-4'>
                   <div className='flex items-center justify-between'>
                     <div>
-                      <label className='text-sm font-medium text-gray-700'>
+                      <label className='text-sm font-medium text-gray-700 dark:text-gray-300'>
                         Email Notifications
                       </label>
-                      <p className='text-xs text-gray-500'>Send system alerts via email</p>
+                      <p className='text-xs text-gray-500 dark:text-gray-400'>
+                        Send system alerts via email
+                      </p>
                     </div>
                     <input
                       type='checkbox'
                       defaultChecked
-                      className='h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded'
+                      className='h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700'
                     />
                   </div>
                   <div className='flex items-center justify-between'>
                     <div>
-                      <label className='text-sm font-medium text-gray-700'>SMS Notifications</label>
-                      <p className='text-xs text-gray-500'>Send critical alerts via SMS</p>
+                      <label className='text-sm font-medium text-gray-700 dark:text-gray-300'>
+                        SMS Notifications
+                      </label>
+                      <p className='text-xs text-gray-500 dark:text-gray-400'>
+                        Send critical alerts via SMS
+                      </p>
                     </div>
                     <input
                       type='checkbox'
-                      className='h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded'
+                      className='h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700'
                     />
                   </div>
                 </div>
               </div>
 
               {/* System Maintenance */}
-              <div className='bg-white shadow rounded-lg p-6'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>System Maintenance</h3>
+              <div className='bg-white dark:bg-gray-800 shadow rounded-lg p-6'>
+                <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-4'>
+                  System Maintenance
+                </h3>
                 <div className='space-y-4'>
                   <button
                     onClick={handleBackupDatabase}
@@ -863,44 +909,44 @@ const Admin: React.FC = () => {
         {activeTab === 'audit' && (
           <div className='space-y-6'>
             {/* Audit Logs Table */}
-            <div className='bg-white shadow rounded-lg overflow-hidden'>
-              <div className='px-6 py-4 border-b border-gray-200'>
-                <h3 className='text-lg font-medium text-gray-900'>Audit Logs</h3>
+            <div className='bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden'>
+              <div className='px-6 py-4 border-b border-gray-200 dark:border-gray-700'>
+                <h3 className='text-lg font-medium text-gray-900 dark:text-white'>Audit Logs</h3>
               </div>
               <div className='overflow-x-auto'>
-                <table className='min-w-full divide-y divide-gray-200'>
-                  <thead className='bg-gray-50'>
+                <table className='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
+                  <thead className='bg-gray-50 dark:bg-gray-700'>
                     <tr>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                         Action
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                         User
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                         Resource
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                         Status
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                         Timestamp
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider'>
                         IP Address
                       </th>
                     </tr>
                   </thead>
-                  <tbody className='bg-white divide-y divide-gray-200'>
+                  <tbody className='bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700'>
                     {auditLogs.map(log => (
-                      <tr key={log.id} className='hover:bg-gray-50'>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
+                      <tr key={log.id} className='hover:bg-gray-50 dark:hover:bg-gray-700'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white'>
                           {log.action}
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400'>
                           {log.user}
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400'>
                           {log.resource}
                         </td>
                         <td className='px-6 py-4 whitespace-nowrap'>
@@ -913,10 +959,10 @@ const Admin: React.FC = () => {
                             {log.status.charAt(0).toUpperCase() + log.status.slice(1)}
                           </span>
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400'>
                           {formatDate(log.timestamp)}
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400'>
                           {log.ipAddress}
                         </td>
                       </tr>

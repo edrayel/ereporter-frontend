@@ -197,10 +197,10 @@ const Dashboard: React.FC = () => {
 
   if (error) {
     return (
-      <div className='min-h-screen bg-gray-50 flex items-center justify-center'>
+      <div className='min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center'>
         <div className='text-center'>
           <ErrorIcon className='h-12 w-12 text-red-500 mx-auto' />
-          <p className='mt-4 text-gray-600'>
+          <p className='mt-4 text-gray-600 dark:text-gray-400'>
             Error:{' '}
             {typeof error === 'string'
               ? error
@@ -208,7 +208,7 @@ const Dashboard: React.FC = () => {
           </p>
           <button
             onClick={loadDashboardData}
-            className='mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700'
+            className='mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600'
           >
             Retry
           </button>
@@ -224,16 +224,16 @@ const Dashboard: React.FC = () => {
         <meta name='description' content='Election monitoring dashboard' />
       </Helmet>
 
-      <div className='min-h-screen bg-gray-50'>
+      <div className='min-h-screen bg-gray-50 dark:bg-gray-900'>
         {/* Header */}
-        <div className='bg-white shadow'>
+        <div className='bg-white dark:bg-gray-800 shadow'>
           <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
             <div className='flex justify-between items-center py-6'>
               <div>
-                <h1 className='text-3xl font-bold text-gray-900'>
+                <h1 className='text-3xl font-bold text-gray-900 dark:text-white'>
                   {getGreeting()}, {user?.name}!
                 </h1>
-                <p className='mt-1 text-sm text-gray-600'>
+                <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
                   Welcome back to your election monitoring dashboard
                   {config.mode !== 'prod' && (
                     <span className='ml-2 px-2 py-1 text-xs bg-yellow-100 text-yellow-800 rounded-full'>
@@ -244,14 +244,14 @@ const Dashboard: React.FC = () => {
               </div>
               <div className='flex items-center space-x-4'>
                 <div className='relative'>
-                  <NotificationIcon className='h-6 w-6 text-gray-400' />
+                  <NotificationIcon className='h-6 w-6 text-gray-400 dark:text-gray-500' />
                   {(notifications.filter((n: any) => !n.read).length > 0 || alerts.length > 0) && (
                     <span className='absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center'>
                       {notifications.filter((n: any) => !n.read).length + alerts.length}
                     </span>
                   )}
                 </div>
-                <div className='text-sm text-gray-500'>
+                <div className='text-sm text-gray-500 dark:text-gray-400'>
                   Role: <span className='font-medium capitalize'>{user?.role}</span>
                 </div>
               </div>
@@ -262,16 +262,18 @@ const Dashboard: React.FC = () => {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
           {/* Statistics Cards */}
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
-            <div className='bg-white overflow-hidden shadow rounded-lg'>
+            <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
               <div className='p-5'>
                 <div className='flex items-center'>
                   <div className='flex-shrink-0'>
-                    <AgentsIcon className='h-6 w-6 text-gray-400' />
+                    <AgentsIcon className='h-6 w-6 text-gray-400 dark:text-gray-500' />
                   </div>
                   <div className='ml-5 w-0 flex-1'>
                     <dl>
-                      <dt className='text-sm font-medium text-gray-500 truncate'>Total Agents</dt>
-                      <dd className='text-lg font-medium text-gray-900'>
+                      <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                        Total Agents
+                      </dt>
+                      <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                         {stats?.totalAgents || 0}
                       </dd>
                     </dl>
@@ -280,18 +282,18 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
 
-            <div className='bg-white overflow-hidden shadow rounded-lg'>
+            <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
               <div className='p-5'>
                 <div className='flex items-center'>
                   <div className='flex-shrink-0'>
-                    <PollingIcon className='h-6 w-6 text-gray-400' />
+                    <PollingIcon className='h-6 w-6 text-gray-400 dark:text-gray-500' />
                   </div>
                   <div className='ml-5 w-0 flex-1'>
                     <dl>
-                      <dt className='text-sm font-medium text-gray-500 truncate'>
+                      <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
                         Active Polling Units
                       </dt>
-                      <dd className='text-lg font-medium text-gray-900'>
+                      <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                         {stats?.activePollingUnits || 0}
                       </dd>
                     </dl>
@@ -300,18 +302,18 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
 
-            <div className='bg-white overflow-hidden shadow rounded-lg'>
+            <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
               <div className='p-5'>
                 <div className='flex items-center'>
                   <div className='flex-shrink-0'>
-                    <ReportsIcon className='h-6 w-6 text-gray-400' />
+                    <ReportsIcon className='h-6 w-6 text-gray-400 dark:text-gray-500' />
                   </div>
                   <div className='ml-5 w-0 flex-1'>
                     <dl>
-                      <dt className='text-sm font-medium text-gray-500 truncate'>
+                      <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
                         Pending Reports
                       </dt>
-                      <dd className='text-lg font-medium text-gray-900'>
+                      <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                         {stats?.pendingReports || 0}
                       </dd>
                     </dl>
@@ -320,18 +322,18 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
 
-            <div className='bg-white overflow-hidden shadow rounded-lg'>
+            <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
               <div className='p-5'>
                 <div className='flex items-center'>
                   <div className='flex-shrink-0'>
-                    <ResultsIcon className='h-6 w-6 text-gray-400' />
+                    <ResultsIcon className='h-6 w-6 text-gray-400 dark:text-gray-500' />
                   </div>
                   <div className='ml-5 w-0 flex-1'>
                     <dl>
-                      <dt className='text-sm font-medium text-gray-500 truncate'>
+                      <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
                         Completed Results
                       </dt>
-                      <dd className='text-lg font-medium text-gray-900'>
+                      <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                         {stats?.verifiedResults || 0}
                       </dd>
                     </dl>
@@ -343,9 +345,9 @@ const Dashboard: React.FC = () => {
 
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
             {/* Quick Actions */}
-            <div className='bg-white shadow rounded-lg'>
-              <div className='px-6 py-4 border-b border-gray-200'>
-                <h3 className='text-lg font-medium text-gray-900'>Quick Actions</h3>
+            <div className='bg-white dark:bg-gray-800 shadow rounded-lg'>
+              <div className='px-6 py-4 border-b border-gray-200 dark:border-gray-700'>
+                <h3 className='text-lg font-medium text-gray-900 dark:text-white'>Quick Actions</h3>
               </div>
               <div className='p-6'>
                 <div className='grid grid-cols-2 gap-4'>
@@ -353,7 +355,7 @@ const Dashboard: React.FC = () => {
                     <Link
                       key={action.title}
                       to={action.link}
-                      className='group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary-500 border border-gray-200 rounded-lg hover:shadow-md transition-shadow'
+                      className='group relative bg-white dark:bg-gray-700 p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary-500 border border-gray-200 dark:border-gray-600 rounded-lg hover:shadow-md transition-shadow'
                     >
                       <div>
                         <span className={`rounded-lg inline-flex p-3 ${action.color} text-white`}>
@@ -372,10 +374,12 @@ const Dashboard: React.FC = () => {
                         </span>
                       </div>
                       <div className='mt-4'>
-                        <h3 className='text-lg font-medium text-gray-900 group-hover:text-primary-600'>
+                        <h3 className='text-lg font-medium text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400'>
                           {action.title}
                         </h3>
-                        <p className='mt-2 text-sm text-gray-500'>{action.description}</p>
+                        <p className='mt-2 text-sm text-gray-500 dark:text-gray-400'>
+                          {action.description}
+                        </p>
                       </div>
                     </Link>
                   ))}
@@ -384,13 +388,17 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Recent Activities */}
-            <div className='bg-white shadow rounded-lg'>
-              <div className='px-6 py-4 border-b border-gray-200'>
-                <h3 className='text-lg font-medium text-gray-900'>Recent Activities</h3>
+            <div className='bg-white dark:bg-gray-800 shadow rounded-lg'>
+              <div className='px-6 py-4 border-b border-gray-200 dark:border-gray-700'>
+                <h3 className='text-lg font-medium text-gray-900 dark:text-white'>
+                  Recent Activities
+                </h3>
               </div>
               <div className='p-6'>
                 {recentActivities.length === 0 ? (
-                  <p className='text-gray-500 text-center py-4'>No recent activities</p>
+                  <p className='text-gray-500 dark:text-gray-400 text-center py-4'>
+                    No recent activities
+                  </p>
                 ) : (
                   <div className='flow-root'>
                     <ul className='-mb-8'>
@@ -399,22 +407,24 @@ const Dashboard: React.FC = () => {
                           <div className='relative pb-8'>
                             {activityIdx !== recentActivities.length - 1 ? (
                               <span
-                                className='absolute top-8 left-4 -ml-px h-full w-0.5 bg-gray-200'
+                                className='absolute top-8 left-4 -ml-px h-full w-0.5 bg-gray-200 dark:bg-gray-600'
                                 aria-hidden='true'
                               />
                             ) : null}
                             <div className='relative flex space-x-3'>
-                              <div className='flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-white border-2 border-gray-200'>
+                              <div className='flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-white dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600'>
                                 {getActivityIcon(activity.type)}
                               </div>
                               <div className='min-w-0 flex-1 pt-1.5 flex justify-between space-x-4'>
                                 <div>
-                                  <p className='text-sm text-gray-900'>{activity.title}</p>
-                                  <p className='text-xs text-gray-500 truncate'>
+                                  <p className='text-sm text-gray-900 dark:text-white'>
+                                    {activity.title}
+                                  </p>
+                                  <p className='text-xs text-gray-500 dark:text-gray-400 truncate'>
                                     {activity.description}
                                   </p>
                                 </div>
-                                <div className='text-right text-sm whitespace-nowrap text-gray-500'>
+                                <div className='text-right text-sm whitespace-nowrap text-gray-500 dark:text-gray-400'>
                                   {formatTimestamp(activity.timestamp)}
                                 </div>
                               </div>
@@ -428,7 +438,7 @@ const Dashboard: React.FC = () => {
                 <div className='mt-6'>
                   <Link
                     to='/app/activities'
-                    className='w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
+                    className='w-full flex justify-center items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'
                   >
                     View all activities
                   </Link>

@@ -202,11 +202,11 @@ const Results: React.FC = () => {
   };
 
   const ResultCard = ({ result }: { result: ElectionResult }) => (
-    <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow'>
+    <div className='bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow'>
       <div className='flex items-start justify-between'>
         <div className='flex-1'>
           <div className='flex items-center space-x-2 mb-2'>
-            <div className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100'>
+            <div className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'>
               <span className='flex-shrink-0'>
                 {getStatusIcon(result.isVerified ? 'verified' : 'pending')}
               </span>
@@ -220,12 +220,12 @@ const Results: React.FC = () => {
             )}
           </div>
 
-          <h3 className='text-lg font-medium text-gray-900 mb-2'>
+          <h3 className='text-lg font-medium text-gray-900 dark:text-white mb-2'>
             {result.pollingUnit?.name || 'Unknown Polling Unit'}
           </h3>
 
           <div className='space-y-2'>
-            <div className='flex items-center text-sm text-gray-500'>
+            <div className='flex items-center text-sm text-gray-500 dark:text-gray-400'>
               <MapPinIcon className='h-4 w-4 mr-2' />
               <span>
                 {result.pollingUnit?.lga} LGA, {result.pollingUnit?.state} State
@@ -233,18 +233,18 @@ const Results: React.FC = () => {
             </div>
 
             {result.agent && (
-              <div className='flex items-center text-sm text-gray-500'>
+              <div className='flex items-center text-sm text-gray-500 dark:text-gray-400'>
                 <UserIcon className='h-4 w-4 mr-2' />
                 <span>Reported by: {result.agent.name}</span>
               </div>
             )}
 
-            <div className='flex items-center text-sm text-gray-500'>
+            <div className='flex items-center text-sm text-gray-500 dark:text-gray-400'>
               <CalendarIcon className='h-4 w-4 mr-2' />
               <span>Submitted: {formatDate(result.createdAt)}</span>
             </div>
 
-            <div className='flex items-center text-sm text-gray-500'>
+            <div className='flex items-center text-sm text-gray-500 dark:text-gray-400'>
               <ChartBarIcon className='h-4 w-4 mr-2' />
               <span>Total Votes: {calculateTotalVotes(result).toLocaleString()}</span>
             </div>
@@ -301,12 +301,12 @@ const Results: React.FC = () => {
   );
 
   const ResultListItem = ({ result }: { result: ElectionResult }) => (
-    <tr className='hover:bg-gray-50'>
+    <tr className='hover:bg-gray-50 dark:hover:bg-gray-700'>
       <td className='px-6 py-4 whitespace-nowrap'>
-        <div className='text-sm font-medium text-gray-900'>
+        <div className='text-sm font-medium text-gray-900 dark:text-white'>
           {result.pollingUnit?.name || 'Unknown'}
         </div>
-        <div className='text-sm text-gray-500'>
+        <div className='text-sm text-gray-500 dark:text-gray-400'>
           {result.pollingUnit?.lga || 'Unknown'} LGA, {result.pollingUnit?.state || 'Unknown'} State
         </div>
       </td>
@@ -327,13 +327,13 @@ const Results: React.FC = () => {
           {result.isVerified ? 'Verified' : 'Pending'}
         </span>
       </td>
-      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white'>
         {result.agent?.name || 'Unknown'}
       </td>
-      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white'>
         {calculateTotalVotes(result).toLocaleString()}
       </td>
-      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400'>
         {formatDate(result.createdAt)}
       </td>
       <td className='px-6 py-4 whitespace-nowrap'>
@@ -410,7 +410,7 @@ const Results: React.FC = () => {
 
         {/* Stats Cards */}
         <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
-          <div className='bg-white overflow-hidden shadow rounded-lg'>
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
             <div className='p-5'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
@@ -418,8 +418,10 @@ const Results: React.FC = () => {
                 </div>
                 <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className='text-sm font-medium text-gray-500 truncate'>Verified Results</dt>
-                    <dd className='text-lg font-medium text-gray-900'>
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                      Verified Results
+                    </dt>
+                    <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                       {results.filter(r => r.isVerified).length}
                     </dd>
                   </dl>
@@ -428,7 +430,7 @@ const Results: React.FC = () => {
             </div>
           </div>
 
-          <div className='bg-white overflow-hidden shadow rounded-lg'>
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
             <div className='p-5'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
@@ -436,8 +438,10 @@ const Results: React.FC = () => {
                 </div>
                 <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className='text-sm font-medium text-gray-500 truncate'>Pending Review</dt>
-                    <dd className='text-lg font-medium text-gray-900'>
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                      Pending Review
+                    </dt>
+                    <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                       {results.filter(r => !r.isVerified).length}
                     </dd>
                   </dl>
@@ -446,7 +450,7 @@ const Results: React.FC = () => {
             </div>
           </div>
 
-          <div className='bg-white overflow-hidden shadow rounded-lg'>
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
             <div className='p-5'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
@@ -454,8 +458,10 @@ const Results: React.FC = () => {
                 </div>
                 <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className='text-sm font-medium text-gray-500 truncate'>Total Votes</dt>
-                    <dd className='text-lg font-medium text-gray-900'>
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                      Total Votes
+                    </dt>
+                    <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                       {results
                         .reduce((total, result) => total + calculateTotalVotes(result), 0)
                         .toLocaleString()}
@@ -466,7 +472,7 @@ const Results: React.FC = () => {
             </div>
           </div>
 
-          <div className='bg-white overflow-hidden shadow rounded-lg'>
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
             <div className='p-5'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
@@ -474,8 +480,12 @@ const Results: React.FC = () => {
                 </div>
                 <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className='text-sm font-medium text-gray-500 truncate'>Polling Units</dt>
-                    <dd className='text-lg font-medium text-gray-900'>{results.length}</dd>
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                      Polling Units
+                    </dt>
+                    <dd className='text-lg font-medium text-gray-900 dark:text-white'>
+                      {results.length}
+                    </dd>
                   </dl>
                 </div>
               </div>
@@ -484,7 +494,7 @@ const Results: React.FC = () => {
         </div>
 
         {/* Filters and Search */}
-        <div className='bg-white shadow rounded-lg p-6'>
+        <div className='bg-white dark:bg-gray-800 shadow rounded-lg p-6'>
           <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0'>
             <div className='flex-1 min-w-0 mr-4'>
               <div className='relative rounded-md shadow-sm'>
@@ -495,7 +505,7 @@ const Results: React.FC = () => {
                   type='text'
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
-                  className='focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
+                  className='focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 sm:text-sm border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400'
                   placeholder='Search polling units...'
                 />
               </div>
@@ -505,7 +515,7 @@ const Results: React.FC = () => {
               <select
                 value={statusFilter}
                 onChange={e => setStatusFilter(e.target.value)}
-                className='focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                className='focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
               >
                 <option value=''>All Status</option>
                 <option value='verified'>Verified</option>
@@ -565,26 +575,26 @@ const Results: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className='bg-white shadow overflow-hidden sm:rounded-md'>
-            <table className='min-w-full divide-y divide-gray-200'>
-              <thead className='bg-gray-50'>
+          <div className='bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-md'>
+            <table className='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
+              <thead className='bg-gray-50 dark:bg-gray-700'>
                 <tr>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Polling Unit
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Status
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Agent
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Total Votes
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Submitted
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Verification
                   </th>
                   <th className='relative px-6 py-3'>
@@ -592,7 +602,7 @@ const Results: React.FC = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody className='bg-white divide-y divide-gray-200'>
+              <tbody className='bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700'>
                 {results.map(result => (
                   <ResultListItem key={result.id} result={result} />
                 ))}
@@ -603,11 +613,13 @@ const Results: React.FC = () => {
 
         {/* Empty State */}
         {results.length === 0 && !loading && (
-          <div className='bg-white shadow rounded-lg p-6'>
+          <div className='bg-white dark:bg-gray-800 shadow rounded-lg p-6'>
             <div className='text-center py-12'>
               <ChartBarIcon className='mx-auto h-12 w-12 text-gray-400' />
-              <h3 className='mt-2 text-sm font-medium text-gray-900'>No results found</h3>
-              <p className='mt-1 text-sm text-gray-500'>
+              <h3 className='mt-2 text-sm font-medium text-gray-900 dark:text-white'>
+                No results found
+              </h3>
+              <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>
                 {searchTerm || statusFilter
                   ? 'Try adjusting your search or filter criteria.'
                   : 'No election results have been uploaded yet.'}

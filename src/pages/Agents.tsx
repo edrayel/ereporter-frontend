@@ -133,11 +133,11 @@ const Agents: React.FC = () => {
   };
 
   const AgentCard = ({ agent }: { agent: Agent }) => (
-    <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow w-full'>
+    <div className='bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow w-full'>
       <div className='flex items-start justify-between'>
         <div className='flex items-center space-x-3 min-w-0 flex-1'>
-          <div className='h-12 w-12 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0'>
-            <span className='text-primary-600 font-semibold text-lg'>
+          <div className='h-12 w-12 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center flex-shrink-0'>
+            <span className='text-primary-600 dark:text-primary-400 font-semibold text-lg'>
               {agent.name
                 .split(' ')
                 .map(n => n[0])
@@ -147,13 +147,15 @@ const Agents: React.FC = () => {
             </span>
           </div>
           <div className='min-w-0 flex-1'>
-            <h3 className='text-lg font-medium text-gray-900 truncate'>{agent.name}</h3>
-            <p className='text-sm text-gray-500 truncate'>{agent.email}</p>
-            <p className='text-sm text-gray-500 truncate'>{agent.phone}</p>
+            <h3 className='text-lg font-medium text-gray-900 dark:text-white truncate'>
+              {agent.name}
+            </h3>
+            <p className='text-sm text-gray-500 dark:text-gray-400 truncate'>{agent.email}</p>
+            <p className='text-sm text-gray-500 dark:text-gray-400 truncate'>{agent.phone}</p>
           </div>
         </div>
         <div className='flex flex-col items-end space-y-2 flex-shrink-0 ml-4'>
-          <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 whitespace-nowrap'>
+          <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 whitespace-nowrap'>
             <span className='flex-shrink-0'>{getStatusIcon(agent.status)}</span>
             <span className='ml-1 capitalize'>{agent.status}</span>
           </span>
@@ -168,14 +170,14 @@ const Agents: React.FC = () => {
 
       <div className='mt-4 space-y-2'>
         {agent.pollingUnit && (
-          <div className='flex items-center text-sm text-gray-600'>
+          <div className='flex items-center text-sm text-gray-600 dark:text-gray-400'>
             <MapPinIcon className='h-4 w-4 mr-2 flex-shrink-0' />
             <span className='truncate'>
               {agent.pollingUnit.name} - {agent.pollingUnit.lga}
             </span>
           </div>
         )}
-        <div className='flex items-center text-sm text-gray-600'>
+        <div className='flex items-center text-sm text-gray-600 dark:text-gray-400'>
           <ClockIcon className='h-4 w-4 mr-2 flex-shrink-0' />
           <span className='truncate'>Last seen: {formatLastSeen(agent.lastSeen)}</span>
         </div>
@@ -184,7 +186,7 @@ const Agents: React.FC = () => {
       <div className='mt-4 flex space-x-2'>
         <button
           onClick={() => handleViewDetails(agent)}
-          className='flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
+          className='flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
         >
           <EyeIcon className='h-4 w-4 mr-1' />
           View Details
@@ -203,11 +205,11 @@ const Agents: React.FC = () => {
   );
 
   const AgentListItem = ({ agent }: { agent: Agent }) => (
-    <tr className='hover:bg-gray-50'>
+    <tr className='hover:bg-gray-50 dark:hover:bg-gray-700'>
       <td className='px-6 py-4 whitespace-nowrap'>
         <div className='flex items-center'>
-          <div className='h-10 w-10 bg-primary-100 rounded-full flex items-center justify-center'>
-            <span className='text-primary-600 font-medium text-sm'>
+          <div className='h-10 w-10 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center'>
+            <span className='text-primary-600 dark:text-primary-400 font-medium text-sm'>
               {agent.name
                 .split(' ')
                 .map(n => n[0])
@@ -217,24 +219,24 @@ const Agents: React.FC = () => {
             </span>
           </div>
           <div className='ml-4'>
-            <div className='text-sm font-medium text-gray-900'>{agent.name}</div>
-            <div className='text-sm text-gray-500'>{agent.email}</div>
+            <div className='text-sm font-medium text-gray-900 dark:text-white'>{agent.name}</div>
+            <div className='text-sm text-gray-500 dark:text-gray-400'>{agent.email}</div>
           </div>
         </div>
       </td>
       <td className='px-6 py-4 whitespace-nowrap'>
-        <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100'>
+        <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'>
           <span className='flex-shrink-0'>{getStatusIcon(agent.status)}</span>
           <span className='ml-1 capitalize'>{agent.status}</span>
         </span>
       </td>
-      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white'>
         {agent.pollingUnit?.name || 'Not assigned'}
       </td>
-      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400'>
         {formatLastSeen(agent.lastSeen)}
       </td>
-      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400'>
         {agent.isOnline ? (
           <div className='flex items-center text-success-600'>
             <div className='h-2 w-2 bg-success-500 rounded-full mr-1 animate-pulse'></div>
@@ -247,14 +249,14 @@ const Agents: React.FC = () => {
       <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
         <button
           onClick={() => handleViewDetails(agent)}
-          className='text-primary-600 hover:text-primary-900 mr-3'
+          className='text-primary-600 hover:text-primary-900 dark:text-primary-400 dark:hover:text-primary-300 mr-3'
         >
           View
         </button>
         {agent.status === 'active' && (
           <button
             onClick={() => handleTrackAgent(agent)}
-            className='text-primary-600 hover:text-primary-900'
+            className='text-primary-600 hover:text-primary-900 dark:text-primary-400 dark:hover:text-primary-300'
           >
             Track
           </button>
@@ -284,8 +286,10 @@ const Agents: React.FC = () => {
           <div className='flex items-center space-x-3'>
             <UsersIcon className='h-8 w-8 text-primary-600' />
             <div>
-              <h1 className='text-2xl font-bold text-gray-900'>Agents</h1>
-              <p className='text-sm text-gray-600'>Manage field agents and their assignments</p>
+              <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>Agents</h1>
+              <p className='text-sm text-gray-600 dark:text-gray-400'>
+                Manage field agents and their assignments
+              </p>
             </div>
           </div>
           <button
@@ -299,7 +303,7 @@ const Agents: React.FC = () => {
 
         {/* Stats Cards */}
         <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
-          <div className='bg-white overflow-hidden shadow rounded-lg'>
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
             <div className='p-5'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
@@ -307,8 +311,10 @@ const Agents: React.FC = () => {
                 </div>
                 <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className='text-sm font-medium text-gray-500 truncate'>Active Agents</dt>
-                    <dd className='text-lg font-medium text-gray-900'>
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                      Active Agents
+                    </dt>
+                    <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                       {agents.filter(a => a.status === 'active').length}
                     </dd>
                   </dl>
@@ -317,7 +323,7 @@ const Agents: React.FC = () => {
             </div>
           </div>
 
-          <div className='bg-white overflow-hidden shadow rounded-lg'>
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
             <div className='p-5'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
@@ -325,8 +331,10 @@ const Agents: React.FC = () => {
                 </div>
                 <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className='text-sm font-medium text-gray-500 truncate'>Online Now</dt>
-                    <dd className='text-lg font-medium text-gray-900'>
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                      Online Now
+                    </dt>
+                    <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                       {agents.filter(a => a.isOnline).length}
                     </dd>
                   </dl>
@@ -335,7 +343,7 @@ const Agents: React.FC = () => {
             </div>
           </div>
 
-          <div className='bg-white overflow-hidden shadow rounded-lg'>
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
             <div className='p-5'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
@@ -343,8 +351,10 @@ const Agents: React.FC = () => {
                 </div>
                 <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className='text-sm font-medium text-gray-500 truncate'>Pending</dt>
-                    <dd className='text-lg font-medium text-gray-900'>
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                      Pending
+                    </dt>
+                    <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                       {agents.filter(a => a.status === 'pending').length}
                     </dd>
                   </dl>
@@ -353,7 +363,7 @@ const Agents: React.FC = () => {
             </div>
           </div>
 
-          <div className='bg-white overflow-hidden shadow rounded-lg'>
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
             <div className='p-5'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
@@ -361,8 +371,12 @@ const Agents: React.FC = () => {
                 </div>
                 <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className='text-sm font-medium text-gray-500 truncate'>Total Agents</dt>
-                    <dd className='text-lg font-medium text-gray-900'>{agents.length}</dd>
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                      Total Agents
+                    </dt>
+                    <dd className='text-lg font-medium text-gray-900 dark:text-white'>
+                      {agents.length}
+                    </dd>
                   </dl>
                 </div>
               </div>
@@ -371,7 +385,7 @@ const Agents: React.FC = () => {
         </div>
 
         {/* Filters and Search */}
-        <div className='bg-white shadow rounded-lg p-6'>
+        <div className='bg-white dark:bg-gray-800 shadow rounded-lg p-6'>
           <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0'>
             <div className='flex-1 min-w-0'>
               <div className='relative rounded-md shadow-sm'>
@@ -382,7 +396,7 @@ const Agents: React.FC = () => {
                   type='text'
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
-                  className='focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
+                  className='focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 sm:text-sm border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400'
                   placeholder='Search agents...'
                 />
               </div>
@@ -392,7 +406,7 @@ const Agents: React.FC = () => {
               <select
                 value={statusFilter}
                 onChange={e => setStatusFilter(e.target.value as AgentStatus | '')}
-                className='focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                className='focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
               >
                 <option value=''>All Status</option>
                 <option value='active'>Active</option>
@@ -454,23 +468,23 @@ const Agents: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className='bg-white shadow overflow-hidden sm:rounded-md'>
-            <table className='min-w-full divide-y divide-gray-200'>
-              <thead className='bg-gray-50'>
+          <div className='bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-md'>
+            <table className='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
+              <thead className='bg-gray-50 dark:bg-gray-700'>
                 <tr>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Agent
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Status
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Polling Unit
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Last Seen
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Online Status
                   </th>
                   <th className='relative px-6 py-3'>
@@ -478,7 +492,7 @@ const Agents: React.FC = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody className='bg-white divide-y divide-gray-200'>
+              <tbody className='bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700'>
                 {agents.map(agent => (
                   <AgentListItem key={agent.id} agent={agent} />
                 ))}

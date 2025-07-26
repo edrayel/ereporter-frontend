@@ -347,8 +347,10 @@ const Reports: React.FC = () => {
           <div className='flex items-center space-x-3'>
             <DocumentTextIcon className='h-8 w-8 text-primary-600' />
             <div>
-              <h1 className='text-2xl font-bold text-gray-900'>Reports</h1>
-              <p className='text-sm text-gray-600'>View and manage incident reports</p>
+              <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>Reports</h1>
+              <p className='text-sm text-gray-600 dark:text-gray-400'>
+                View and manage incident reports
+              </p>
             </div>
           </div>
           <button
@@ -362,7 +364,7 @@ const Reports: React.FC = () => {
 
         {/* Stats Cards */}
         <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
-          <div className='bg-white overflow-hidden shadow rounded-lg'>
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
             <div className='p-5'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
@@ -370,8 +372,10 @@ const Reports: React.FC = () => {
                 </div>
                 <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className='text-sm font-medium text-gray-500 truncate'>Pending Reports</dt>
-                    <dd className='text-lg font-medium text-gray-900'>
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                      Pending Reports
+                    </dt>
+                    <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                       {reports.filter(r => r.status === 'pending').length}
                     </dd>
                   </dl>
@@ -380,7 +384,7 @@ const Reports: React.FC = () => {
             </div>
           </div>
 
-          <div className='bg-white overflow-hidden shadow rounded-lg'>
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
             <div className='p-5'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
@@ -388,8 +392,10 @@ const Reports: React.FC = () => {
                 </div>
                 <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className='text-sm font-medium text-gray-500 truncate'>Investigating</dt>
-                    <dd className='text-lg font-medium text-gray-900'>
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                      Investigating
+                    </dt>
+                    <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                       {reports.filter(r => r.status === 'reviewed').length}
                     </dd>
                   </dl>
@@ -398,7 +404,7 @@ const Reports: React.FC = () => {
             </div>
           </div>
 
-          <div className='bg-white overflow-hidden shadow rounded-lg'>
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
             <div className='p-5'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
@@ -406,8 +412,10 @@ const Reports: React.FC = () => {
                 </div>
                 <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className='text-sm font-medium text-gray-500 truncate'>Critical</dt>
-                    <dd className='text-lg font-medium text-gray-900'>
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                      Critical
+                    </dt>
+                    <dd className='text-lg font-medium text-gray-900 dark:text-white'>
                       {reports.filter(r => r.severity === 'critical').length}
                     </dd>
                   </dl>
@@ -416,7 +424,7 @@ const Reports: React.FC = () => {
             </div>
           </div>
 
-          <div className='bg-white overflow-hidden shadow rounded-lg'>
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
             <div className='p-5'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
@@ -424,8 +432,12 @@ const Reports: React.FC = () => {
                 </div>
                 <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className='text-sm font-medium text-gray-500 truncate'>Total Reports</dt>
-                    <dd className='text-lg font-medium text-gray-900'>{reports.length}</dd>
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
+                      Total Reports
+                    </dt>
+                    <dd className='text-lg font-medium text-gray-900 dark:text-white'>
+                      {reports.length}
+                    </dd>
                   </dl>
                 </div>
               </div>
@@ -434,7 +446,7 @@ const Reports: React.FC = () => {
         </div>
 
         {/* Filters and Search */}
-        <div className='bg-white shadow rounded-lg p-6'>
+        <div className='bg-white dark:bg-gray-800 shadow rounded-lg p-6'>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4'>
             <div className='lg:col-span-2'>
               <div className='relative rounded-md shadow-sm'>
@@ -445,7 +457,7 @@ const Reports: React.FC = () => {
                   type='text'
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
-                  className='focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
+                  className='focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 sm:text-sm border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400'
                   placeholder='Search reports...'
                 />
               </div>
@@ -454,7 +466,7 @@ const Reports: React.FC = () => {
             <select
               value={categoryFilter}
               onChange={e => setCategoryFilter(e.target.value as ReportCategory | '')}
-              className='focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 rounded-md'
+              className='focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
             >
               <option value=''>All Categories</option>
               <option value='violence'>Violence</option>
@@ -467,7 +479,7 @@ const Reports: React.FC = () => {
             <select
               value={severityFilter}
               onChange={e => setSeverityFilter(e.target.value as ReportSeverity | '')}
-              className='focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 rounded-md'
+              className='focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
             >
               <option value=''>All Severities</option>
               <option value='critical'>Critical</option>
@@ -479,7 +491,7 @@ const Reports: React.FC = () => {
             <select
               value={statusFilter}
               onChange={e => setStatusFilter(e.target.value as ReportStatus | '')}
-              className='focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 rounded-md'
+              className='focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
             >
               <option value=''>All Status</option>
               <option value='pending'>Pending</option>
@@ -494,8 +506,8 @@ const Reports: React.FC = () => {
                 className={classNames(
                   viewMode === 'grid'
                     ? 'bg-primary-600 text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-50',
-                  'relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 text-sm font-medium focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500',
+                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600',
+                  'relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 dark:border-gray-600 text-sm font-medium focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500',
                 )}
               >
                 Grid
@@ -505,8 +517,8 @@ const Reports: React.FC = () => {
                 className={classNames(
                   viewMode === 'list'
                     ? 'bg-primary-600 text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-50',
-                  'relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 text-sm font-medium focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500',
+                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600',
+                  'relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 dark:border-gray-600 text-sm font-medium focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500',
                 )}
               >
                 List
@@ -540,26 +552,26 @@ const Reports: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className='bg-white shadow overflow-hidden sm:rounded-md'>
-            <table className='min-w-full divide-y divide-gray-200'>
-              <thead className='bg-gray-50'>
+          <div className='bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-md'>
+            <table className='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
+              <thead className='bg-gray-50 dark:bg-gray-700'>
                 <tr>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Report
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Severity
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Status
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Reporter
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Location
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider'>
                     Date
                   </th>
                   <th className='relative px-6 py-3'>
@@ -567,7 +579,7 @@ const Reports: React.FC = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody className='bg-white divide-y divide-gray-200'>
+              <tbody className='bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700'>
                 {reports.map(report => (
                   <ReportListItem key={report.id} report={report} />
                 ))}
@@ -578,11 +590,13 @@ const Reports: React.FC = () => {
 
         {/* Empty State */}
         {reports.length === 0 && !loading && (
-          <div className='bg-white shadow rounded-lg p-6'>
+          <div className='bg-white dark:bg-gray-800 shadow rounded-lg p-6'>
             <div className='text-center py-12'>
               <DocumentTextIcon className='mx-auto h-12 w-12 text-gray-400' />
-              <h3 className='mt-2 text-sm font-medium text-gray-900'>No reports found</h3>
-              <p className='mt-1 text-sm text-gray-500'>
+              <h3 className='mt-2 text-sm font-medium text-gray-900 dark:text-white'>
+                No reports found
+              </h3>
+              <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>
                 {searchTerm || categoryFilter || severityFilter || statusFilter
                   ? 'Try adjusting your search or filter criteria.'
                   : 'No incident reports have been submitted yet.'}

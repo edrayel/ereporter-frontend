@@ -207,17 +207,17 @@ const Activities: React.FC = () => {
   const getRoleColor = (role: string) => {
     switch (role.toLowerCase()) {
       case 'admin':
-        return 'bg-error-100 text-error-800';
+        return 'bg-error-100 text-error-800 dark:bg-error-900 dark:text-error-200';
       case 'supervisor':
-        return 'bg-warning-100 text-warning-800';
+        return 'bg-warning-100 text-warning-800 dark:bg-warning-900 dark:text-warning-200';
       case 'agent':
-        return 'bg-primary-100 text-primary-800';
+        return 'bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200';
       case 'security':
-        return 'bg-secondary-100 text-secondary-800';
+        return 'bg-secondary-100 text-secondary-800 dark:bg-secondary-900 dark:text-secondary-200';
       case 'system':
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
     }
   };
 
