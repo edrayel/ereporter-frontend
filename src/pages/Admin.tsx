@@ -234,8 +234,9 @@ const Admin: React.FC = () => {
   };
 
   const filteredUsers = users.filter(user => {
-    const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         user.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch =
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesRole = roleFilter === 'all' || user.role === roleFilter;
     const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
     return matchesSearch && matchesRole && matchesStatus;
@@ -267,11 +268,9 @@ const Admin: React.FC = () => {
   };
 
   const handleUserUpdated = (updatedUser: any) => {
-    setUsers(prev => prev.map(user => 
-      user.id === selectedUser?.id 
-        ? { ...user, ...updatedUser }
-        : user
-    ));
+    setUsers(prev =>
+      prev.map(user => (user.id === selectedUser?.id ? { ...user, ...updatedUser } : user)),
+    );
     setShowEditUserModal(false);
     setSelectedUser(null);
   };
@@ -307,7 +306,15 @@ const Admin: React.FC = () => {
   };
 
   const generateAuditLogsCSV = (logs: AuditLog[]) => {
-    const headers = ['Action', 'User', 'Resource', 'Status', 'Timestamp', 'IP Address', 'User Agent'];
+    const headers = [
+      'Action',
+      'User',
+      'Resource',
+      'Status',
+      'Timestamp',
+      'IP Address',
+      'User Agent',
+    ];
     const rows = logs.map(log => [
       log.action,
       log.user,
@@ -315,7 +322,7 @@ const Admin: React.FC = () => {
       log.status,
       formatDate(log.timestamp),
       log.ipAddress,
-      log.userAgent
+      log.userAgent,
     ]);
     return [headers, ...rows].map(row => row.join(',')).join('\n');
   };
@@ -533,28 +540,28 @@ const Admin: React.FC = () => {
             <div className='bg-white shadow rounded-lg p-6'>
               <h3 className='text-lg font-medium text-gray-900 mb-4'>Quick Actions</h3>
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-                <button 
+                <button
                   onClick={() => setShowAddUserModal(true)}
                   className='flex items-center justify-center px-4 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50'
                 >
                   <UserPlusIcon className='h-4 w-4 mr-2' />
                   Add User
                 </button>
-                <button 
+                <button
                   onClick={() => setActiveTab('settings')}
                   className='flex items-center justify-center px-4 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50'
                 >
                   <CogIcon className='h-4 w-4 mr-2' />
                   System Settings
                 </button>
-                <button 
+                <button
                   onClick={handleExportLogs}
                   className='flex items-center justify-center px-4 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50'
                 >
                   <DocumentTextIcon className='h-4 w-4 mr-2' />
                   Export Logs
                 </button>
-                <button 
+                <button
                   onClick={handleSendAlert}
                   className='flex items-center justify-center px-4 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50'
                 >
@@ -605,7 +612,7 @@ const Admin: React.FC = () => {
                   <option value='inactive'>Inactive</option>
                   <option value='suspended'>Suspended</option>
                 </select>
-                <button 
+                <button
                   onClick={() => setShowAddUserModal(true)}
                   className='px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 flex items-center space-x-2'
                 >
@@ -684,19 +691,19 @@ const Admin: React.FC = () => {
                         </td>
                         <td className='px-6 py-4 whitespace-nowrap text-sm font-medium'>
                           <div className='flex space-x-2'>
-                            <button 
+                            <button
                               onClick={() => handleViewUser(user)}
                               className='text-primary-600 hover:text-primary-900'
                             >
                               <EyeIcon className='h-4 w-4' />
                             </button>
-                            <button 
+                            <button
                               onClick={() => handleEditUser(user)}
                               className='text-gray-600 hover:text-gray-900'
                             >
                               <PencilIcon className='h-4 w-4' />
                             </button>
-                            <button 
+                            <button
                               onClick={() => handleDeleteUser(user)}
                               className='text-error-600 hover:text-error-900'
                             >
@@ -825,21 +832,21 @@ const Admin: React.FC = () => {
               <div className='bg-white shadow rounded-lg p-6'>
                 <h3 className='text-lg font-medium text-gray-900 mb-4'>System Maintenance</h3>
                 <div className='space-y-4'>
-                  <button 
+                  <button
                     onClick={handleBackupDatabase}
                     className='w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50'
                   >
                     <CircleStackIcon className='h-4 w-4 mr-2' />
                     Backup Database
                   </button>
-                  <button 
+                  <button
                     onClick={handleClearCache}
                     className='w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50'
                   >
                     <ServerIcon className='h-4 w-4 mr-2' />
                     Clear Cache
                   </button>
-                  <button 
+                  <button
                     onClick={handleSystemReset}
                     className='w-full flex items-center justify-center px-4 py-2 border border-error-300 rounded-md shadow-sm text-sm font-medium text-error-700 bg-white hover:bg-error-50'
                   >
@@ -950,26 +957,27 @@ const Admin: React.FC = () => {
 
       {/* Confirmation Dialogs */}
       {showDeleteConfirm && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-            <div className="mt-3 text-center">
-              <ExclamationTriangleIcon className="mx-auto h-12 w-12 text-red-600" />
-              <h3 className="text-lg font-medium text-gray-900 mt-2">Delete User</h3>
-              <div className="mt-2 px-7 py-3">
-                <p className="text-sm text-gray-500">
-                  Are you sure you want to delete {userToDelete?.name}? This action cannot be undone.
+        <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
+          <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
+            <div className='mt-3 text-center'>
+              <ExclamationTriangleIcon className='mx-auto h-12 w-12 text-red-600' />
+              <h3 className='text-lg font-medium text-gray-900 mt-2'>Delete User</h3>
+              <div className='mt-2 px-7 py-3'>
+                <p className='text-sm text-gray-500'>
+                  Are you sure you want to delete {userToDelete?.name}? This action cannot be
+                  undone.
                 </p>
               </div>
-              <div className="flex justify-center space-x-3 mt-4">
+              <div className='flex justify-center space-x-3 mt-4'>
                 <button
                   onClick={() => setShowDeleteConfirm(false)}
-                  className="px-4 py-2 bg-gray-300 text-gray-800 text-base font-medium rounded-md shadow-sm hover:bg-gray-400"
+                  className='px-4 py-2 bg-gray-300 text-gray-800 text-base font-medium rounded-md shadow-sm hover:bg-gray-400'
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmDeleteUser}
-                  className="px-4 py-2 bg-red-600 text-white text-base font-medium rounded-md shadow-sm hover:bg-red-700"
+                  className='px-4 py-2 bg-red-600 text-white text-base font-medium rounded-md shadow-sm hover:bg-red-700'
                 >
                   Delete
                 </button>
@@ -980,26 +988,27 @@ const Admin: React.FC = () => {
       )}
 
       {showBackupConfirm && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-            <div className="mt-3 text-center">
-              <CircleStackIcon className="mx-auto h-12 w-12 text-blue-600" />
-              <h3 className="text-lg font-medium text-gray-900 mt-2">Backup Database</h3>
-              <div className="mt-2 px-7 py-3">
-                <p className="text-sm text-gray-500">
-                  This will create a full backup of the database. The process may take several minutes.
+        <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
+          <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
+            <div className='mt-3 text-center'>
+              <CircleStackIcon className='mx-auto h-12 w-12 text-blue-600' />
+              <h3 className='text-lg font-medium text-gray-900 mt-2'>Backup Database</h3>
+              <div className='mt-2 px-7 py-3'>
+                <p className='text-sm text-gray-500'>
+                  This will create a full backup of the database. The process may take several
+                  minutes.
                 </p>
               </div>
-              <div className="flex justify-center space-x-3 mt-4">
+              <div className='flex justify-center space-x-3 mt-4'>
                 <button
                   onClick={() => setShowBackupConfirm(false)}
-                  className="px-4 py-2 bg-gray-300 text-gray-800 text-base font-medium rounded-md shadow-sm hover:bg-gray-400"
+                  className='px-4 py-2 bg-gray-300 text-gray-800 text-base font-medium rounded-md shadow-sm hover:bg-gray-400'
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmBackupDatabase}
-                  className="px-4 py-2 bg-blue-600 text-white text-base font-medium rounded-md shadow-sm hover:bg-blue-700"
+                  className='px-4 py-2 bg-blue-600 text-white text-base font-medium rounded-md shadow-sm hover:bg-blue-700'
                 >
                   Start Backup
                 </button>
@@ -1010,26 +1019,27 @@ const Admin: React.FC = () => {
       )}
 
       {showClearCacheConfirm && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-            <div className="mt-3 text-center">
-              <ServerIcon className="mx-auto h-12 w-12 text-yellow-600" />
-              <h3 className="text-lg font-medium text-gray-900 mt-2">Clear Cache</h3>
-              <div className="mt-2 px-7 py-3">
-                <p className="text-sm text-gray-500">
-                  This will clear all system cache. Users may experience slower performance temporarily.
+        <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
+          <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
+            <div className='mt-3 text-center'>
+              <ServerIcon className='mx-auto h-12 w-12 text-yellow-600' />
+              <h3 className='text-lg font-medium text-gray-900 mt-2'>Clear Cache</h3>
+              <div className='mt-2 px-7 py-3'>
+                <p className='text-sm text-gray-500'>
+                  This will clear all system cache. Users may experience slower performance
+                  temporarily.
                 </p>
               </div>
-              <div className="flex justify-center space-x-3 mt-4">
+              <div className='flex justify-center space-x-3 mt-4'>
                 <button
                   onClick={() => setShowClearCacheConfirm(false)}
-                  className="px-4 py-2 bg-gray-300 text-gray-800 text-base font-medium rounded-md shadow-sm hover:bg-gray-400"
+                  className='px-4 py-2 bg-gray-300 text-gray-800 text-base font-medium rounded-md shadow-sm hover:bg-gray-400'
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmClearCache}
-                  className="px-4 py-2 bg-yellow-600 text-white text-base font-medium rounded-md shadow-sm hover:bg-yellow-700"
+                  className='px-4 py-2 bg-yellow-600 text-white text-base font-medium rounded-md shadow-sm hover:bg-yellow-700'
                 >
                   Clear Cache
                 </button>
@@ -1040,26 +1050,27 @@ const Admin: React.FC = () => {
       )}
 
       {showSystemResetConfirm && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-            <div className="mt-3 text-center">
-              <ExclamationTriangleIcon className="mx-auto h-12 w-12 text-red-600" />
-              <h3 className="text-lg font-medium text-gray-900 mt-2">System Reset</h3>
-              <div className="mt-2 px-7 py-3">
-                <p className="text-sm text-gray-500">
-                  <strong>WARNING:</strong> This will reset the entire system to factory defaults. All data will be lost. This action cannot be undone.
+        <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
+          <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
+            <div className='mt-3 text-center'>
+              <ExclamationTriangleIcon className='mx-auto h-12 w-12 text-red-600' />
+              <h3 className='text-lg font-medium text-gray-900 mt-2'>System Reset</h3>
+              <div className='mt-2 px-7 py-3'>
+                <p className='text-sm text-gray-500'>
+                  <strong>WARNING:</strong> This will reset the entire system to factory defaults.
+                  All data will be lost. This action cannot be undone.
                 </p>
               </div>
-              <div className="flex justify-center space-x-3 mt-4">
+              <div className='flex justify-center space-x-3 mt-4'>
                 <button
                   onClick={() => setShowSystemResetConfirm(false)}
-                  className="px-4 py-2 bg-gray-300 text-gray-800 text-base font-medium rounded-md shadow-sm hover:bg-gray-400"
+                  className='px-4 py-2 bg-gray-300 text-gray-800 text-base font-medium rounded-md shadow-sm hover:bg-gray-400'
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmSystemReset}
-                  className="px-4 py-2 bg-red-600 text-white text-base font-medium rounded-md shadow-sm hover:bg-red-700"
+                  className='px-4 py-2 bg-red-600 text-white text-base font-medium rounded-md shadow-sm hover:bg-red-700'
                 >
                   Reset System
                 </button>

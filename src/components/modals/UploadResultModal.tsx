@@ -63,7 +63,7 @@ const UploadResultModal: React.FC<UploadResultModalProps> = ({
     if (file) {
       setFormImage(file);
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = e => {
         setImagePreview(e.target?.result as string);
       };
       reader.readAsDataURL(file);
@@ -114,10 +114,11 @@ const UploadResultModal: React.FC<UploadResultModalProps> = ({
     // Check if total votes match
     const candidateVotesSum = formData.candidates.reduce(
       (sum, candidate) => sum + (Number(candidate.votes) || 0),
-      0
+      0,
     );
-    const totalValidInvalid = (Number(formData.validVotes) || 0) + (Number(formData.invalidVotes) || 0);
-    
+    const totalValidInvalid =
+      (Number(formData.validVotes) || 0) + (Number(formData.invalidVotes) || 0);
+
     if (candidateVotesSum !== Number(formData.validVotes)) {
       newErrors.validation = 'Sum of candidate votes must equal valid votes';
     }
@@ -132,7 +133,7 @@ const UploadResultModal: React.FC<UploadResultModalProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -155,7 +156,7 @@ const UploadResultModal: React.FC<UploadResultModalProps> = ({
 
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       // Create mock result
       const newResult = {
         id: `result_${Date.now()}`,
@@ -201,72 +202,62 @@ const UploadResultModal: React.FC<UploadResultModalProps> = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} title="Upload Election Result" size="xl">
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <Modal isOpen={isOpen} onClose={handleClose} title='Upload Election Result' size='xl'>
+      <form onSubmit={handleSubmit} className='space-y-6'>
         {/* Vote Totals */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Total Votes *
-            </label>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>Total Votes *</label>
             <input
-              type="number"
+              type='number'
               value={formData.totalVotes}
-              onChange={(e) => handleInputChange('totalVotes', e.target.value)}
+              onChange={e => handleInputChange('totalVotes', e.target.value)}
               className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 ${
                 errors.totalVotes ? 'border-red-500' : 'border-gray-300'
               }`}
-              placeholder="Enter total votes"
+              placeholder='Enter total votes'
             />
-            {errors.totalVotes && (
-              <p className="text-red-500 text-xs mt-1">{errors.totalVotes}</p>
-            )}
+            {errors.totalVotes && <p className='text-red-500 text-xs mt-1'>{errors.totalVotes}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Valid Votes *
-            </label>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>Valid Votes *</label>
             <input
-              type="number"
+              type='number'
               value={formData.validVotes}
-              onChange={(e) => handleInputChange('validVotes', e.target.value)}
+              onChange={e => handleInputChange('validVotes', e.target.value)}
               className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 ${
                 errors.validVotes ? 'border-red-500' : 'border-gray-300'
               }`}
-              placeholder="Enter valid votes"
+              placeholder='Enter valid votes'
             />
-            {errors.validVotes && (
-              <p className="text-red-500 text-xs mt-1">{errors.validVotes}</p>
-            )}
+            {errors.validVotes && <p className='text-red-500 text-xs mt-1'>{errors.validVotes}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Invalid Votes *
-            </label>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>Invalid Votes *</label>
             <input
-              type="number"
+              type='number'
               value={formData.invalidVotes}
-              onChange={(e) => handleInputChange('invalidVotes', e.target.value)}
+              onChange={e => handleInputChange('invalidVotes', e.target.value)}
               className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 ${
                 errors.invalidVotes ? 'border-red-500' : 'border-gray-300'
               }`}
-              placeholder="Enter invalid votes"
+              placeholder='Enter invalid votes'
             />
             {errors.invalidVotes && (
-              <p className="text-red-500 text-xs mt-1">{errors.invalidVotes}</p>
+              <p className='text-red-500 text-xs mt-1'>{errors.invalidVotes}</p>
             )}
           </div>
         </div>
 
         {/* Validation Error */}
         {errors.validation && (
-          <div className="bg-red-50 border border-red-200 rounded-md p-3">
-            <div className="flex">
-              <ExclamationCircleIcon className="h-5 w-5 text-red-400" />
-              <div className="ml-3">
-                <p className="text-sm text-red-800">{errors.validation}</p>
+          <div className='bg-red-50 border border-red-200 rounded-md p-3'>
+            <div className='flex'>
+              <ExclamationCircleIcon className='h-5 w-5 text-red-400' />
+              <div className='ml-3'>
+                <p className='text-sm text-red-800'>{errors.validation}</p>
               </div>
             </div>
           </div>
@@ -274,80 +265,83 @@ const UploadResultModal: React.FC<UploadResultModalProps> = ({
 
         {/* Candidates */}
         <div>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-medium text-gray-900">Candidate Results</h3>
+          <div className='flex items-center justify-between mb-4'>
+            <h3 className='text-lg font-medium text-gray-900'>Candidate Results</h3>
             <button
-              type="button"
+              type='button'
               onClick={addCandidate}
-              className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-primary-700 bg-primary-100 hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+              className='inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-primary-700 bg-primary-100 hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
             >
               Add Candidate
             </button>
           </div>
 
-          <div className="space-y-4">
+          <div className='space-y-4'>
             {formData.candidates.map((candidate, index) => (
-              <div key={index} className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 border border-gray-200 rounded-lg">
+              <div
+                key={index}
+                className='grid grid-cols-1 md:grid-cols-4 gap-4 p-4 border border-gray-200 rounded-lg'
+              >
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className='block text-sm font-medium text-gray-700 mb-1'>
                     Candidate Name *
                   </label>
                   <input
-                    type="text"
+                    type='text'
                     value={candidate.name}
-                    onChange={(e) => handleCandidateChange(index, 'name', e.target.value)}
+                    onChange={e => handleCandidateChange(index, 'name', e.target.value)}
                     className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 ${
                       errors[`candidate_${index}_name`] ? 'border-red-500' : 'border-gray-300'
                     }`}
-                    placeholder="Enter candidate name"
+                    placeholder='Enter candidate name'
                   />
                   {errors[`candidate_${index}_name`] && (
-                    <p className="text-red-500 text-xs mt-1">{errors[`candidate_${index}_name`]}</p>
+                    <p className='text-red-500 text-xs mt-1'>{errors[`candidate_${index}_name`]}</p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Party *
-                  </label>
+                  <label className='block text-sm font-medium text-gray-700 mb-1'>Party *</label>
                   <input
-                    type="text"
+                    type='text'
                     value={candidate.party}
-                    onChange={(e) => handleCandidateChange(index, 'party', e.target.value)}
+                    onChange={e => handleCandidateChange(index, 'party', e.target.value)}
                     className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 ${
                       errors[`candidate_${index}_party`] ? 'border-red-500' : 'border-gray-300'
                     }`}
-                    placeholder="Enter party"
+                    placeholder='Enter party'
                   />
                   {errors[`candidate_${index}_party`] && (
-                    <p className="text-red-500 text-xs mt-1">{errors[`candidate_${index}_party`]}</p>
+                    <p className='text-red-500 text-xs mt-1'>
+                      {errors[`candidate_${index}_party`]}
+                    </p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Votes *
-                  </label>
+                  <label className='block text-sm font-medium text-gray-700 mb-1'>Votes *</label>
                   <input
-                    type="number"
+                    type='number'
                     value={candidate.votes}
-                    onChange={(e) => handleCandidateChange(index, 'votes', e.target.value)}
+                    onChange={e => handleCandidateChange(index, 'votes', e.target.value)}
                     className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 ${
                       errors[`candidate_${index}_votes`] ? 'border-red-500' : 'border-gray-300'
                     }`}
-                    placeholder="Enter votes"
+                    placeholder='Enter votes'
                   />
                   {errors[`candidate_${index}_votes`] && (
-                    <p className="text-red-500 text-xs mt-1">{errors[`candidate_${index}_votes`]}</p>
+                    <p className='text-red-500 text-xs mt-1'>
+                      {errors[`candidate_${index}_votes`]}
+                    </p>
                   )}
                 </div>
 
-                <div className="flex items-end">
+                <div className='flex items-end'>
                   {formData.candidates.length > 1 && (
                     <button
-                      type="button"
+                      type='button'
                       onClick={() => removeCandidate(index)}
-                      className="w-full px-3 py-2 border border-red-300 text-red-700 rounded-md hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                      className='w-full px-3 py-2 border border-red-300 text-red-700 rounded-md hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
                     >
                       Remove
                     </button>
@@ -360,45 +354,43 @@ const UploadResultModal: React.FC<UploadResultModalProps> = ({
 
         {/* Form Image Upload */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className='block text-sm font-medium text-gray-700 mb-2'>
             Result Form Image (Optional)
           </label>
-          
+
           {!imagePreview ? (
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6">
-              <div className="text-center">
-                <PhotoIcon className="mx-auto h-12 w-12 text-gray-400" />
-                <div className="mt-4">
-                  <label className="cursor-pointer">
-                    <span className="mt-2 block text-sm font-medium text-gray-900">
+            <div className='border-2 border-dashed border-gray-300 rounded-lg p-6'>
+              <div className='text-center'>
+                <PhotoIcon className='mx-auto h-12 w-12 text-gray-400' />
+                <div className='mt-4'>
+                  <label className='cursor-pointer'>
+                    <span className='mt-2 block text-sm font-medium text-gray-900'>
                       Upload result form image
                     </span>
                     <input
-                      type="file"
-                      className="sr-only"
-                      accept="image/*"
+                      type='file'
+                      className='sr-only'
+                      accept='image/*'
                       onChange={handleImageUpload}
                     />
                   </label>
                 </div>
-                <p className="mt-2 text-xs text-gray-500">
-                  PNG, JPG, GIF up to 10MB
-                </p>
+                <p className='mt-2 text-xs text-gray-500'>PNG, JPG, GIF up to 10MB</p>
               </div>
             </div>
           ) : (
-            <div className="relative">
+            <div className='relative'>
               <img
                 src={imagePreview}
-                alt="Form preview"
-                className="w-full h-48 object-cover rounded-lg"
+                alt='Form preview'
+                className='w-full h-48 object-cover rounded-lg'
               />
               <button
-                type="button"
+                type='button'
                 onClick={removeImage}
-                className="absolute top-2 right-2 p-1 bg-red-600 text-white rounded-full hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                className='absolute top-2 right-2 p-1 bg-red-600 text-white rounded-full hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
               >
-                <XIcon className="h-4 w-4" />
+                <XIcon className='h-4 w-4' />
               </button>
             </div>
           )}
@@ -406,38 +398,38 @@ const UploadResultModal: React.FC<UploadResultModalProps> = ({
 
         {/* Submit Error */}
         {errors.submit && (
-          <div className="bg-red-50 border border-red-200 rounded-md p-3">
-            <div className="flex">
-              <ExclamationCircleIcon className="h-5 w-5 text-red-400" />
-              <div className="ml-3">
-                <p className="text-sm text-red-800">{errors.submit}</p>
+          <div className='bg-red-50 border border-red-200 rounded-md p-3'>
+            <div className='flex'>
+              <ExclamationCircleIcon className='h-5 w-5 text-red-400' />
+              <div className='ml-3'>
+                <p className='text-sm text-red-800'>{errors.submit}</p>
               </div>
             </div>
           </div>
         )}
 
         {/* Action Buttons */}
-        <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+        <div className='flex justify-end space-x-3 pt-6 border-t border-gray-200'>
           <button
-            type="button"
+            type='button'
             onClick={handleClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            className='px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
           >
             Cancel
           </button>
           <button
-            type="submit"
+            type='submit'
             disabled={loading}
-            className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className='inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed'
           >
             {loading ? (
               <>
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2'></div>
                 Uploading...
               </>
             ) : (
               <>
-                <DocumentArrowUpIcon className="h-4 w-4 mr-2" />
+                <DocumentArrowUpIcon className='h-4 w-4 mr-2' />
                 Upload Result
               </>
             )}

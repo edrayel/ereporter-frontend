@@ -316,8 +316,14 @@ class MockDataService {
           reportedBy: agent.name,
           reportedAt: timestamp,
           assignedTo: Math.random() > 0.5 ? 'Investigation Team' : undefined,
-          resolvedAt: Math.random() > 0.3 ? undefined : new Date(Date.now() - Math.random() * 6 * 60 * 60 * 1000).toISOString(),
-          resolution: Math.random() > 0.3 ? undefined : 'Issue resolved through appropriate intervention and monitoring.',
+          resolvedAt:
+            Math.random() > 0.3
+              ? undefined
+              : new Date(Date.now() - Math.random() * 6 * 60 * 60 * 1000).toISOString(),
+          resolution:
+            Math.random() > 0.3
+              ? undefined
+              : 'Issue resolved through appropriate intervention and monitoring.',
         });
       }
     });

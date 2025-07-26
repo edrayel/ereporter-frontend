@@ -133,7 +133,10 @@ const Results: React.FC = () => {
       const link = document.createElement('a');
       const url = URL.createObjectURL(blob);
       link.setAttribute('href', url);
-      link.setAttribute('download', `election_results_${new Date().toISOString().split('T')[0]}.csv`);
+      link.setAttribute(
+        'download',
+        `election_results_${new Date().toISOString().split('T')[0]}.csv`,
+      );
       link.style.visibility = 'hidden';
       document.body.appendChild(link);
       link.click();
@@ -157,7 +160,7 @@ const Results: React.FC = () => {
       'Submitted Date',
       'Verified',
       'Verified By',
-      'Verified Date'
+      'Verified Date',
     ];
 
     const rows = results.map(result => [
@@ -172,7 +175,7 @@ const Results: React.FC = () => {
       formatDate(result.createdAt),
       result.isVerified ? 'Yes' : 'No',
       result.verifiedBy || '',
-      result.verifiedAt ? formatDate(result.verifiedAt) : ''
+      result.verifiedAt ? formatDate(result.verifiedAt) : '',
     ]);
 
     return [headers, ...rows].map(row => row.join(',')).join('\n');
@@ -189,10 +192,8 @@ const Results: React.FC = () => {
   };
 
   const handleResultVerified = (updatedResult: ElectionResult) => {
-    setResults(prevResults => 
-      prevResults.map(result => 
-        result.id === updatedResult.id ? updatedResult : result
-      )
+    setResults(prevResults =>
+      prevResults.map(result => (result.id === updatedResult.id ? updatedResult : result)),
     );
   };
 
@@ -288,7 +289,7 @@ const Results: React.FC = () => {
           View Details
         </button>
         {!result.isVerified && (
-          <button 
+          <button
             onClick={() => handleVerifyResult(result)}
             className='inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
           >
@@ -353,7 +354,7 @@ const Results: React.FC = () => {
           View
         </button>
         {!result.isVerified && (
-          <button 
+          <button
             onClick={() => handleVerifyResult(result)}
             className='text-primary-600 hover:text-primary-900'
           >
@@ -390,7 +391,7 @@ const Results: React.FC = () => {
             </div>
           </div>
           <div className='flex space-x-3'>
-            <button 
+            <button
               onClick={handleExportResults}
               className='inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
             >

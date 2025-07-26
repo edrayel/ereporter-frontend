@@ -190,7 +190,7 @@ const Agents: React.FC = () => {
           View Details
         </button>
         {agent.status === 'active' && (
-          <button 
+          <button
             onClick={() => handleTrackAgent(agent)}
             className='inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 whitespace-nowrap'
           >
@@ -252,7 +252,7 @@ const Agents: React.FC = () => {
           View
         </button>
         {agent.status === 'active' && (
-          <button 
+          <button
             onClick={() => handleTrackAgent(agent)}
             className='text-primary-600 hover:text-primary-900'
           >
@@ -288,7 +288,7 @@ const Agents: React.FC = () => {
               <p className='text-sm text-gray-600'>Manage field agents and their assignments</p>
             </div>
           </div>
-          <button 
+          <button
             onClick={handleAddAgent}
             className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
           >
@@ -499,7 +499,7 @@ const Agents: React.FC = () => {
                   : 'Get started by adding your first agent.'}
               </p>
               <div className='mt-6'>
-                <button 
+                <button
                   onClick={handleAddAgent}
                   className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
                 >
@@ -521,26 +521,26 @@ const Agents: React.FC = () => {
         )}
 
         {showDetailsModal && selectedAgent && (
-           <AgentDetailsModal
-             isOpen={showDetailsModal}
-             onClose={() => {
-               setShowDetailsModal(false);
-               setSelectedAgent(null);
-             }}
-             agent={selectedAgent}
-           />
-         )}
+          <AgentDetailsModal
+            isOpen={showDetailsModal}
+            onClose={() => {
+              setShowDetailsModal(false);
+              setSelectedAgent(null);
+            }}
+            agent={selectedAgent}
+          />
+        )}
 
-         {showTrackModal && selectedAgent && (
-           <TrackAgentModal
-             isOpen={showTrackModal}
-             onClose={() => {
-               setShowTrackModal(false);
-               setSelectedAgent(null);
-             }}
-             agent={selectedAgent}
-           />
-         )}
+        {showTrackModal && selectedAgent && (
+          <TrackAgentModal
+            isOpen={showTrackModal}
+            onClose={() => {
+              setShowTrackModal(false);
+              setSelectedAgent(null);
+            }}
+            agent={selectedAgent}
+          />
+        )}
       </div>
     </>
   );

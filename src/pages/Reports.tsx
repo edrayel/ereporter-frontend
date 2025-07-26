@@ -49,7 +49,7 @@ const Reports: React.FC = () => {
     end: '',
   });
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  
+
   // Modal states
   const [showNewReportModal, setShowNewReportModal] = useState(false);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
@@ -179,7 +179,7 @@ const Reports: React.FC = () => {
   };
 
   const handleReportUpdated = (updatedReport: any) => {
-    setReports(prev => prev.map(r => r.id === updatedReport.id ? updatedReport : r));
+    setReports(prev => prev.map(r => (r.id === updatedReport.id ? updatedReport : r)));
     setShowInvestigateModal(false);
   };
 
@@ -265,7 +265,7 @@ const Reports: React.FC = () => {
           View Details
         </button>
         {report.status === 'pending' && (
-          <button 
+          <button
             onClick={() => handleInvestigateReport(report)}
             className='inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
           >
@@ -315,7 +315,7 @@ const Reports: React.FC = () => {
           View
         </button>
         {report.status === 'pending' && (
-          <button 
+          <button
             onClick={() => handleInvestigateReport(report)}
             className='text-primary-600 hover:text-primary-900'
           >
@@ -351,7 +351,7 @@ const Reports: React.FC = () => {
               <p className='text-sm text-gray-600'>View and manage incident reports</p>
             </div>
           </div>
-          <button 
+          <button
             onClick={() => setShowNewReportModal(true)}
             className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
           >
@@ -588,7 +588,7 @@ const Reports: React.FC = () => {
                   : 'No incident reports have been submitted yet.'}
               </p>
               <div className='mt-6'>
-                <button 
+                <button
                   onClick={() => setShowNewReportModal(true)}
                   className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
                 >

@@ -3,7 +3,9 @@ import React from 'react';
 import { FallbackProps } from 'react-error-boundary';
 
 // Type assertions for Heroicons compatibility
-const ExclamationTriangleIcon = ExclamationIcon as React.ComponentType<React.SVGProps<SVGSVGElement>>;
+const ExclamationTriangleIcon = ExclamationIcon as React.ComponentType<
+  React.SVGProps<SVGSVGElement>
+>;
 const ArrowPathIcon = RefreshIcon as React.ComponentType<React.SVGProps<SVGSVGElement>>;
 
 const ErrorFallback: React.FC<FallbackProps> = ({ error, resetErrorBoundary }) => {

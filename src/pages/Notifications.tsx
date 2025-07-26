@@ -11,7 +11,11 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store';
-import { markNotificationAsRead, removeNotification, clearNotifications } from '../store/slices/uiSlice';
+import {
+  markNotificationAsRead,
+  removeNotification,
+  clearNotifications,
+} from '../store/slices/uiSlice';
 import { classNames } from '../utils/helpers';
 
 // Type assertions for Heroicons
@@ -74,29 +78,31 @@ const Notifications: React.FC = () => {
     },
   ]);
 
-  const allNotifications = [...notifications.map(n => ({
-    ...n,
-    timestamp: new Date().toISOString(),
-  })), ...mockNotifications];
+  const allNotifications = [
+    ...notifications.map(n => ({
+      ...n,
+      timestamp: new Date().toISOString(),
+    })),
+    ...mockNotifications,
+  ];
 
-  const filteredNotifications = filter === 'unread' 
-    ? allNotifications.filter(n => !n.read)
-    : allNotifications;
+  const filteredNotifications =
+    filter === 'unread' ? allNotifications.filter(n => !n.read) : allNotifications;
 
   const unreadCount = allNotifications.filter(n => !n.read).length;
 
   const getNotificationIcon = (type: string) => {
     switch (type) {
       case 'success':
-        return <SuccessIcon className="h-6 w-6 text-success-600" />;
+        return <SuccessIcon className='h-6 w-6 text-success-600' />;
       case 'error':
-        return <ErrorIcon className="h-6 w-6 text-error-600" />;
+        return <ErrorIcon className='h-6 w-6 text-error-600' />;
       case 'warning':
-        return <WarningIcon className="h-6 w-6 text-warning-600" />;
+        return <WarningIcon className='h-6 w-6 text-warning-600' />;
       case 'info':
-        return <InfoIcon className="h-6 w-6 text-primary-600" />;
+        return <InfoIcon className='h-6 w-6 text-primary-600' />;
       default:
-        return <NotificationIcon className="h-6 w-6 text-gray-600" />;
+        return <NotificationIcon className='h-6 w-6 text-gray-600' />;
     }
   };
 
@@ -148,43 +154,43 @@ const Notifications: React.FC = () => {
         <title>Notifications - eReporter</title>
       </Helmet>
 
-      <div className="space-y-6">
+      <div className='space-y-6'>
         {/* Header */}
-        <div className="md:flex md:items-center md:justify-between">
-          <div className="flex-1 min-w-0">
-            <h2 className="text-2xl font-bold leading-7 text-gray-900 dark:text-gray-100 sm:text-3xl sm:truncate">
+        <div className='md:flex md:items-center md:justify-between'>
+          <div className='flex-1 min-w-0'>
+            <h2 className='text-2xl font-bold leading-7 text-gray-900 dark:text-gray-100 sm:text-3xl sm:truncate'>
               Notifications
             </h2>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>
               Stay updated with the latest activities and alerts
             </p>
           </div>
-          <div className="mt-4 flex md:mt-0 md:ml-4">
+          <div className='mt-4 flex md:mt-0 md:ml-4'>
             <button
               onClick={handleClearAll}
               disabled={loading || allNotifications.length === 0}
-              className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className='inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed'
             >
-              <DeleteIcon className="h-4 w-4 mr-2" />
+              <DeleteIcon className='h-4 w-4 mr-2' />
               Clear All
             </button>
           </div>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
-            <div className="p-5">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <NotificationIcon className="h-6 w-6 text-gray-400" />
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
+            <div className='p-5'>
+              <div className='flex items-center'>
+                <div className='flex-shrink-0'>
+                  <NotificationIcon className='h-6 w-6 text-gray-400' />
                 </div>
-                <div className="ml-5 w-0 flex-1">
+                <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
                       Total Notifications
                     </dt>
-                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">
+                    <dd className='text-lg font-medium text-gray-900 dark:text-gray-100'>
                       {allNotifications.length}
                     </dd>
                   </dl>
@@ -193,20 +199,20 @@ const Notifications: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
-            <div className="p-5">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <div className="h-6 w-6 bg-primary-100 rounded-full flex items-center justify-center">
-                    <span className="text-xs font-medium text-primary-600">{unreadCount}</span>
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
+            <div className='p-5'>
+              <div className='flex items-center'>
+                <div className='flex-shrink-0'>
+                  <div className='h-6 w-6 bg-primary-100 rounded-full flex items-center justify-center'>
+                    <span className='text-xs font-medium text-primary-600'>{unreadCount}</span>
                   </div>
                 </div>
-                <div className="ml-5 w-0 flex-1">
+                <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
                       Unread
                     </dt>
-                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">
+                    <dd className='text-lg font-medium text-gray-900 dark:text-gray-100'>
                       {unreadCount}
                     </dd>
                   </dl>
@@ -215,18 +221,18 @@ const Notifications: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
-            <div className="p-5">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <SuccessIcon className="h-6 w-6 text-success-400" />
+          <div className='bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg'>
+            <div className='p-5'>
+              <div className='flex items-center'>
+                <div className='flex-shrink-0'>
+                  <SuccessIcon className='h-6 w-6 text-success-400' />
                 </div>
-                <div className="ml-5 w-0 flex-1">
+                <div className='ml-5 w-0 flex-1'>
                   <dl>
-                    <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
+                    <dt className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate'>
                       Read
                     </dt>
-                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">
+                    <dd className='text-lg font-medium text-gray-900 dark:text-gray-100'>
                       {allNotifications.length - unreadCount}
                     </dd>
                   </dl>
@@ -237,19 +243,19 @@ const Notifications: React.FC = () => {
         </div>
 
         {/* Filter Tabs */}
-        <div className="border-b border-gray-200 dark:border-gray-700">
-          <nav className="-mb-px flex space-x-8">
+        <div className='border-b border-gray-200 dark:border-gray-700'>
+          <nav className='-mb-px flex space-x-8'>
             <button
               onClick={() => setFilter('all')}
               className={classNames(
                 filter === 'all'
                   ? 'border-primary-500 text-primary-600 dark:text-primary-400'
                   : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300',
-                'whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm'
+                'whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm',
               )}
             >
               All Notifications
-              <span className="ml-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 py-0.5 px-2.5 rounded-full text-xs font-medium">
+              <span className='ml-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 py-0.5 px-2.5 rounded-full text-xs font-medium'>
                 {allNotifications.length}
               </span>
             </button>
@@ -259,12 +265,12 @@ const Notifications: React.FC = () => {
                 filter === 'unread'
                   ? 'border-primary-500 text-primary-600 dark:text-primary-400'
                   : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300',
-                'whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm'
+                'whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm',
               )}
             >
               Unread
               {unreadCount > 0 && (
-                <span className="ml-2 bg-primary-100 dark:bg-primary-900 text-primary-900 dark:text-primary-100 py-0.5 px-2.5 rounded-full text-xs font-medium">
+                <span className='ml-2 bg-primary-100 dark:bg-primary-900 text-primary-900 dark:text-primary-100 py-0.5 px-2.5 rounded-full text-xs font-medium'>
                   {unreadCount}
                 </span>
               )}
@@ -273,67 +279,67 @@ const Notifications: React.FC = () => {
         </div>
 
         {/* Notifications List */}
-        <div className="space-y-4">
+        <div className='space-y-4'>
           {filteredNotifications.length === 0 ? (
-            <div className="text-center py-12">
-              <NotificationIcon className="mx-auto h-12 w-12 text-gray-400" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+            <div className='text-center py-12'>
+              <NotificationIcon className='mx-auto h-12 w-12 text-gray-400' />
+              <h3 className='mt-2 text-sm font-medium text-gray-900 dark:text-gray-100'>
                 No notifications
               </h3>
-              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                {filter === 'unread' ? 'All notifications have been read.' : 'You have no notifications yet.'}
+              <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>
+                {filter === 'unread'
+                  ? 'All notifications have been read.'
+                  : 'You have no notifications yet.'}
               </p>
             </div>
           ) : (
-            filteredNotifications.map((notification) => (
+            filteredNotifications.map(notification => (
               <div
                 key={notification.id}
                 className={classNames(
                   'border rounded-lg p-4 transition-colors',
                   notification.read
                     ? 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'
-                    : getNotificationBgColor(notification.type)
+                    : getNotificationBgColor(notification.type),
                 )}
               >
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0">
-                    {getNotificationIcon(notification.type)}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between">
-                      <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                <div className='flex items-start space-x-3'>
+                  <div className='flex-shrink-0'>{getNotificationIcon(notification.type)}</div>
+                  <div className='flex-1 min-w-0'>
+                    <div className='flex items-center justify-between'>
+                      <h4 className='text-sm font-medium text-gray-900 dark:text-gray-100'>
                         {notification.title}
                       </h4>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                      <div className='flex items-center space-x-2'>
+                        <span className='text-xs text-gray-500 dark:text-gray-400'>
                           {formatTimestamp(notification.timestamp)}
                         </span>
                         {!notification.read && (
                           <button
                             onClick={() => handleMarkAsRead(notification.id)}
-                            className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
-                            title="Mark as read"
+                            className='text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300'
+                            title='Mark as read'
                           >
-                            <MarkReadIcon className="h-4 w-4" />
+                            <MarkReadIcon className='h-4 w-4' />
                           </button>
                         )}
                         <button
                           onClick={() => handleDelete(notification.id)}
-                          className="text-gray-400 hover:text-error-600 dark:hover:text-error-400"
-                          title="Delete notification"
+                          className='text-gray-400 hover:text-error-600 dark:hover:text-error-400'
+                          title='Delete notification'
                         >
-                          <DeleteIcon className="h-4 w-4" />
+                          <DeleteIcon className='h-4 w-4' />
                         </button>
                       </div>
                     </div>
                     {notification.message && (
-                      <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                      <p className='mt-1 text-sm text-gray-600 dark:text-gray-300'>
                         {notification.message}
                       </p>
                     )}
                     {!notification.read && (
-                      <div className="mt-2">
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200">
+                      <div className='mt-2'>
+                        <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200'>
                           New
                         </span>
                       </div>

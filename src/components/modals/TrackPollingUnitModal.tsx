@@ -124,15 +124,15 @@ const TrackPollingUnitModal: React.FC<TrackPollingUnitModalProps> = ({
   const getActivityIcon = (type: ActivityLog['type']) => {
     switch (type) {
       case 'check-in':
-        return <UsersIcon className="h-4 w-4" />;
+        return <UsersIcon className='h-4 w-4' />;
       case 'status-update':
-        return <RefreshIcon className="h-4 w-4" />;
+        return <RefreshIcon className='h-4 w-4' />;
       case 'report':
-        return <EyeIcon className="h-4 w-4" />;
+        return <EyeIcon className='h-4 w-4' />;
       case 'alert':
-        return <ExclamationCircleIcon className="h-4 w-4" />;
+        return <ExclamationCircleIcon className='h-4 w-4' />;
       default:
-        return <ClockIcon className="h-4 w-4" />;
+        return <ClockIcon className='h-4 w-4' />;
     }
   };
 
@@ -165,19 +165,19 @@ const TrackPollingUnitModal: React.FC<TrackPollingUnitModalProps> = ({
   if (!pollingUnit) return null;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Track Polling Unit" size="xl">
-      <div className="space-y-6">
+    <Modal isOpen={isOpen} onClose={onClose} title='Track Polling Unit' size='xl'>
+      <div className='space-y-6'>
         {/* Header Info */}
-        <div className="bg-gray-50 rounded-lg p-4">
-          <div className="flex items-start justify-between">
-            <div className="flex items-start space-x-3">
-              <div className="flex-shrink-0">
-                <MapPinIcon className="h-8 w-8 text-primary-600" />
+        <div className='bg-gray-50 rounded-lg p-4'>
+          <div className='flex items-start justify-between'>
+            <div className='flex items-start space-x-3'>
+              <div className='flex-shrink-0'>
+                <MapPinIcon className='h-8 w-8 text-primary-600' />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900">{pollingUnit.name}</h3>
-                <p className="text-sm text-gray-600">Code: {pollingUnit.code}</p>
-                <p className="text-sm text-gray-600">
+                <h3 className='text-xl font-semibold text-gray-900'>{pollingUnit.name}</h3>
+                <p className='text-sm text-gray-600'>Code: {pollingUnit.code}</p>
+                <p className='text-sm text-gray-600'>
                   {pollingUnit.lga}, {pollingUnit.state}
                 </p>
               </div>
@@ -185,7 +185,7 @@ const TrackPollingUnitModal: React.FC<TrackPollingUnitModalProps> = ({
             <button
               onClick={handleRefresh}
               disabled={isRefreshing}
-              className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50"
+              className='flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50'
             >
               <RefreshIcon className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
               <span>Refresh</span>
@@ -194,61 +194,65 @@ const TrackPollingUnitModal: React.FC<TrackPollingUnitModalProps> = ({
         </div>
 
         {/* Live Statistics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-blue-50 rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <UsersIcon className="h-6 w-6 text-blue-600" />
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+          <div className='bg-blue-50 rounded-lg p-4'>
+            <div className='flex items-center space-x-3'>
+              <UsersIcon className='h-6 w-6 text-blue-600' />
               <div>
-                <p className="text-sm font-medium text-blue-900">Agents On-Site</p>
-                <p className="text-2xl font-bold text-blue-600">{liveStats.agentsOnSite}</p>
+                <p className='text-sm font-medium text-blue-900'>Agents On-Site</p>
+                <p className='text-2xl font-bold text-blue-600'>{liveStats.agentsOnSite}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-green-50 rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <CheckCircleIcon className="h-6 w-6 text-green-600" />
+          <div className='bg-green-50 rounded-lg p-4'>
+            <div className='flex items-center space-x-3'>
+              <CheckCircleIcon className='h-6 w-6 text-green-600' />
               <div>
-                <p className="text-sm font-medium text-green-900">Voter Turnout</p>
-                <p className="text-2xl font-bold text-green-600">{liveStats.voterTurnout}%</p>
+                <p className='text-sm font-medium text-green-900'>Voter Turnout</p>
+                <p className='text-2xl font-bold text-green-600'>{liveStats.voterTurnout}%</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-yellow-50 rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <ExclamationCircleIcon className="h-6 w-6 text-yellow-600" />
+          <div className='bg-yellow-50 rounded-lg p-4'>
+            <div className='flex items-center space-x-3'>
+              <ExclamationCircleIcon className='h-6 w-6 text-yellow-600' />
               <div>
-                <p className="text-sm font-medium text-yellow-900">Incidents</p>
-                <p className="text-2xl font-bold text-yellow-600">{liveStats.incidentReports}</p>
+                <p className='text-sm font-medium text-yellow-900'>Incidents</p>
+                <p className='text-2xl font-bold text-yellow-600'>{liveStats.incidentReports}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-gray-50 rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <div className={`h-6 w-6 rounded-full flex items-center justify-center ${getSystemStatusColor(liveStats.systemStatus)}`}>
-                <div className="h-3 w-3 rounded-full bg-current"></div>
+          <div className='bg-gray-50 rounded-lg p-4'>
+            <div className='flex items-center space-x-3'>
+              <div
+                className={`h-6 w-6 rounded-full flex items-center justify-center ${getSystemStatusColor(liveStats.systemStatus)}`}
+              >
+                <div className='h-3 w-3 rounded-full bg-current'></div>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-900">System Status</p>
-                <p className="text-sm font-semibold capitalize text-gray-600">{liveStats.systemStatus}</p>
+                <p className='text-sm font-medium text-gray-900'>System Status</p>
+                <p className='text-sm font-semibold capitalize text-gray-600'>
+                  {liveStats.systemStatus}
+                </p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Activity Timeline */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h4 className="text-lg font-medium text-gray-900">Recent Activity</h4>
-            <p className="text-sm text-gray-500">
+        <div className='space-y-4'>
+          <div className='flex items-center justify-between'>
+            <h4 className='text-lg font-medium text-gray-900'>Recent Activity</h4>
+            <p className='text-sm text-gray-500'>
               Last updated: {formatTime(liveStats.lastActivity)}
             </p>
           </div>
-          
-          <div className="bg-white border border-gray-200 rounded-lg">
-            <div className="max-h-64 overflow-y-auto">
+
+          <div className='bg-white border border-gray-200 rounded-lg'>
+            <div className='max-h-64 overflow-y-auto'>
               {activityLogs.map((log, index) => (
                 <div
                   key={log.id}
@@ -257,14 +261,14 @@ const TrackPollingUnitModal: React.FC<TrackPollingUnitModalProps> = ({
                   <div className={`flex-shrink-0 p-2 rounded-full ${getStatusColor(log.status)}`}>
                     {getActivityIcon(log.type)}
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900">{log.message}</p>
-                    <div className="flex items-center space-x-2 mt-1">
-                      <p className="text-xs text-gray-500">{formatTime(log.timestamp)}</p>
+                  <div className='flex-1 min-w-0'>
+                    <p className='text-sm font-medium text-gray-900'>{log.message}</p>
+                    <div className='flex items-center space-x-2 mt-1'>
+                      <p className='text-xs text-gray-500'>{formatTime(log.timestamp)}</p>
                       {log.agent && (
                         <>
-                          <span className="text-xs text-gray-300">•</span>
-                          <p className="text-xs text-gray-500">{log.agent}</p>
+                          <span className='text-xs text-gray-300'>•</span>
+                          <p className='text-xs text-gray-500'>{log.agent}</p>
                         </>
                       )}
                     </div>
@@ -276,26 +280,27 @@ const TrackPollingUnitModal: React.FC<TrackPollingUnitModalProps> = ({
         </div>
 
         {/* Location Map Placeholder */}
-        <div className="space-y-4">
-          <h4 className="text-lg font-medium text-gray-900">Location</h4>
-          <div className="bg-gray-100 rounded-lg p-8 text-center">
-            <MapPinIcon className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-600">Interactive map would be displayed here</p>
-            <p className="text-sm text-gray-500 mt-2">
-              Coordinates: {pollingUnit.coordinates.latitude.toFixed(6)}, {pollingUnit.coordinates.longitude.toFixed(6)}
+        <div className='space-y-4'>
+          <h4 className='text-lg font-medium text-gray-900'>Location</h4>
+          <div className='bg-gray-100 rounded-lg p-8 text-center'>
+            <MapPinIcon className='h-12 w-12 text-gray-400 mx-auto mb-4' />
+            <p className='text-gray-600'>Interactive map would be displayed here</p>
+            <p className='text-sm text-gray-500 mt-2'>
+              Coordinates: {pollingUnit.coordinates.latitude.toFixed(6)},{' '}
+              {pollingUnit.coordinates.longitude.toFixed(6)}
             </p>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+        <div className='flex justify-end space-x-3 pt-6 border-t border-gray-200'>
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            className='px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
           >
             Close
           </button>
-          <button className="px-4 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+          <button className='px-4 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'>
             View Full Report
           </button>
         </div>

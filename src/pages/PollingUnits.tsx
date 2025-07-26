@@ -88,7 +88,7 @@ const PollingUnits: React.FC = () => {
   };
 
   const handlePollingUnitUpdated = (updatedUnit: PollingUnit) => {
-    setPollingUnits(prev => prev.map(unit => unit.id === updatedUnit.id ? updatedUnit : unit));
+    setPollingUnits(prev => prev.map(unit => (unit.id === updatedUnit.id ? updatedUnit : unit)));
     setShowEditModal(false);
   };
 
